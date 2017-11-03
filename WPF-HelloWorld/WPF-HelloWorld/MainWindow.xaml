@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="51,41,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="70,105,0,0" VerticalAlignment="Top" Width="75"/>
+        <CheckBox x:Name="checkBox" Content="CheckBox" HorizontalAlignment="Left" Margin="70,72,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="radioButton" Content="RadioButton" HorizontalAlignment="Left" Margin="70,159,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="312,72,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="203,72,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="88" Width="72"/>
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="100" Margin="203,165,0,0" VerticalAlignment="Top" Width="100"/>
+        <Calendar HorizontalAlignment="Left" Margin="312,138,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>
