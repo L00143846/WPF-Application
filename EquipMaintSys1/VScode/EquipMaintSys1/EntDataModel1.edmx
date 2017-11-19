@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="L00143846_EquiptMaintSys1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Component">
+          <Key>
+            <PropertyRef Name="Serial_Num" />
+          </Key>
+          <Property Name="Serial_Num" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Supplier" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Manufacturer" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date_Replaced" Type="datetime" />
+          <Property Name="Linked_Equiptment" Type="varchar" MaxLength="50" />
+          <Property Name="Kept_In_Stock" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Archived" Type="varchar" MaxLength="1" />
+          <Property Name="Archived_By" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Contractors">
+          <Key>
+            <PropertyRef Name="Company_Name" />
+          </Key>
+          <Property Name="Company_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contact_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone_Num_1" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Phone_Num_2" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="CompAddress" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Archived" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Archived_By" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmpNum" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="EmpNum" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="UserPassword" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Dept" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Manager" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Emp_Type" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Archived" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Archived_By" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Equiptment">
+          <Key>
+            <PropertyRef Name="Serial_Num" />
+          </Key>
+          <Property Name="Serial_Num" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Supplier" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Manufacturer" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date_of_Purchase" Type="datetime" Nullable="false" />
+          <Property Name="Warranty_Expire" Type="datetime" Nullable="false" />
+          <Property Name="Support" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Downtime_cost_hr" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Archived" Type="varchar" MaxLength="1" />
+          <Property Name="Archived_By" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Fault_Log">
+          <Key>
+            <PropertyRef Name="Event_Num" />
+          </Key>
+          <Property Name="Event_Num" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Equiptment" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Component" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Downtime" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Technician" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fault_Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="Start_Date_Time" Type="datetime" Nullable="false" />
+          <Property Name="End_Date_Time" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Maintenance_Schedule">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Equiptment" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Downtime" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Implementor" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Job_Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="Frequency" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Start_Date_Time" Type="datetime" Nullable="false" />
+          <Property Name="End_Date_Time" Type="datetime" Nullable="false" />
+          <Property Name="Archived" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Archived_by" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="L00143846_EquiptMaintSys1ModelStoreContainer">
+          <EntitySet Name="Component" EntityType="Self.Component" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contractors" EntityType="Self.Contractors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equiptment" EntityType="Self.Equiptment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fault_Log" EntityType="Self.Fault_Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Maintenance_Schedule" EntityType="Self.Maintenance_Schedule" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="L00143846_EquiptMaintSys1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Component">
+          <Key>
+            <PropertyRef Name="Serial_Num" />
+          </Key>
+          <Property Name="Serial_Num" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Supplier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Manufacturer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date_Replaced" Type="DateTime" Precision="3" />
+          <Property Name="Linked_Equiptment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Kept_In_Stock" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Archived" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Archived_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Contractor">
+          <Key>
+            <PropertyRef Name="Company_Name" />
+          </Key>
+          <Property Name="Company_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contact_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone_Num_1" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone_Num_2" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CompAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Archived" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Archived_By" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmpNum" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmpNum" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Dept" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Manager" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Emp_Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Archived" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Archived_By" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Equiptment">
+          <Key>
+            <PropertyRef Name="Serial_Num" />
+          </Key>
+          <Property Name="Serial_Num" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Supplier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Manufacturer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date_of_Purchase" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Warranty_Expire" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Support" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Downtime_cost_hr" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Archived" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Archived_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Fault_Log">
+          <Key>
+            <PropertyRef Name="Event_Num" />
+          </Key>
+          <Property Name="Event_Num" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Equiptment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Component" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Downtime" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Technician" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fault_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Start_Date_Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="End_Date_Time" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Maintenance_Schedule">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Equiptment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Downtime" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Implementor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Job_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Frequency" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Start_Date_Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="End_Date_Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Archived" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Archived_by" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="L00143846_EquiptMaintSys1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Components" EntityType="Self.Component" />
+          <EntitySet Name="Contractors" EntityType="Self.Contractor" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Equiptments" EntityType="Self.Equiptment" />
+          <EntitySet Name="Fault_Log" EntityType="Self.Fault_Log" />
+          <EntitySet Name="Items" EntityType="Self.Item" />
+          <EntitySet Name="Maintenance_Schedule" EntityType="Self.Maintenance_Schedule" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="L00143846_EquiptMaintSys1ModelStoreContainer" CdmEntityContainer="L00143846_EquiptMaintSys1Entities">
+          <EntitySetMapping Name="Components">
+            <EntityTypeMapping TypeName="L00143846_EquiptMaintSys1Model.Component">
+              <MappingFragment StoreEntitySet="Component">
+                <ScalarProperty Name="Serial_Num" ColumnName="Serial_Num" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Date_Replaced" ColumnName="Date_Replaced" />
+                <ScalarProperty Name="Linked_Equiptment" ColumnName="Linked_Equiptment" />
+                <ScalarProperty Name="Kept_In_Stock" ColumnName="Kept_In_Stock" />
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="Archived_By" ColumnName="Archived_By" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contractors">
+            <EntityTypeMapping TypeName="L00143846_EquiptMaintSys1Model.Contractor">
+              <MappingFragment StoreEntitySet="Contractors">
+                <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
+                <ScalarProperty Name="Contact_Name" ColumnName="Contact_Name" />
+                <ScalarProperty Name="Phone_Num_1" ColumnName="Phone_Num_1" />
+                <ScalarProperty Name="Phone_Num_2" ColumnName="Phone_Num_2" />
+                <ScalarProperty Name="CompAddress" ColumnName="CompAddress" />
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="Archived_By" ColumnName="Archived_By" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="L00143846_EquiptMaintSys1Model.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmpNum" ColumnName="EmpNum" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="Dept" ColumnName="Dept" />
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="Emp_Type" ColumnName="Emp_Type" />
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="Archived_By" ColumnName="Archived_By" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equiptments">
+            <EntityTypeMapping TypeName="L00143846_EquiptMaintSys1Model.Equiptment">
+              <MappingFragment StoreEntitySet="Equiptment">
+                <ScalarProperty Name="Serial_Num" ColumnName="Serial_Num" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Date_of_Purchase" ColumnName="Date_of_Purchase" />
+                <ScalarProperty Name="Warranty_Expire" ColumnName="Warranty_Expire" />
+                <ScalarProperty Name="Support" ColumnName="Support" />
+                <ScalarProperty Name="Downtime_cost_hr" ColumnName="Downtime_cost_hr" />
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="Archived_By" ColumnName="Archived_By" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fault_Log">
+            <EntityTypeMapping TypeName="L00143846_EquiptMaintSys1Model.Fault_Log">
+              <MappingFragment StoreEntitySet="Fault_Log">
+                <ScalarProperty Name="Event_Num" ColumnName="Event_Num" />
+                <ScalarProperty Name="Equiptment" ColumnName="Equiptment" />
+                <ScalarProperty Name="Component" ColumnName="Component" />
+                <ScalarProperty Name="Downtime" ColumnName="Downtime" />
+                <ScalarProperty Name="Technician" ColumnName="Technician" />
+                <ScalarProperty Name="Fault_Description" ColumnName="Fault_Description" />
+                <ScalarProperty Name="Start_Date_Time" ColumnName="Start_Date_Time" />
+                <ScalarProperty Name="End_Date_Time" ColumnName="End_Date_Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="L00143846_EquiptMaintSys1Model.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Maintenance_Schedule">
+            <EntityTypeMapping TypeName="L00143846_EquiptMaintSys1Model.Maintenance_Schedule">
+              <MappingFragment StoreEntitySet="Maintenance_Schedule">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Equiptment" ColumnName="Equiptment" />
+                <ScalarProperty Name="Downtime" ColumnName="Downtime" />
+                <ScalarProperty Name="Implementor" ColumnName="Implementor" />
+                <ScalarProperty Name="Job_Description" ColumnName="Job_Description" />
+                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+                <ScalarProperty Name="Start_Date_Time" ColumnName="Start_Date_Time" />
+                <ScalarProperty Name="End_Date_Time" ColumnName="End_Date_Time" />
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="Archived_by" ColumnName="Archived_by" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,61 @@
+﻿<Window x:Class="EquipMaintSys1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EquipMaintSys1"
+        mc:Ignorable="d"
+        Title="EMSystems" Height="500" Width="700">
+    <Grid>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="449" Margin="10,10,0,0" VerticalAlignment="Top" Width="672">
+            <TabItem Header="Search" Height="35" Width="60" Padding="6,2">
+                <Grid Background="#FFE5E5E5">
+                    <Button x:Name="searchBtn" Content="Submit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="70"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Faults" Height="35" Width="60" VerticalAlignment="Top" Padding="6,2">
+                <Grid Background="#FFE5E5E5">
+                    <Button x:Name="faultsBtn" Content="Submit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="70"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Admin" Height="35" Width="60" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="6,2" >
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="209*"/>
+                        <ColumnDefinition Width="457*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="adminBtn" Content="Submit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="71" Grid.Column="1"/>
+                    <Button x:Name="addBtn" Content="Add Item" HorizontalAlignment="Left" Margin="138,35,0,0" VerticalAlignment="Top" Width="121" Height="20" Grid.ColumnSpan="2"/>
+                    <Button x:Name="archiveBtn" Content="Archive Item" HorizontalAlignment="Left" Margin="55,35,0,0" VerticalAlignment="Top" Width="121" Height="20" Grid.Column="1"/>
+                    <Button x:Name="queryBreakBtn" Content="Query Breakdown's" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Width="121"/>
+                    <Button x:Name="queryMaintBtn" Content="Query Maintenance" HorizontalAlignment="Left" Margin="138,10,0,0" VerticalAlignment="Top" Width="121" Grid.ColumnSpan="2"/>
+                    <Button x:Name="queryCompBtn" Content="Query Components" Grid.Column="1" HorizontalAlignment="Left" Margin="55,10,0,0" VerticalAlignment="Top" Width="121"/>
+                    <ComboBox x:Name="cbo_Selection" HorizontalAlignment="Left" Margin="251,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1">
+
+                    </ComboBox>
+
+
+
+                    <DockPanel HorizontalAlignment="Left" Height="336" LastChildFill="False" Margin="10,60,0,0" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="2">
+                        <ListView x:Name="listV_data" Height="306" VerticalAlignment="Top" Width="619" ItemsSource="{Binding TestListSummaryCollection}" Margin="0,30,0,0">
+                            <!--<ListView x:Name="listView" Height="320" VerticalAlignment="Top" Width="488" ItemsSource="{Binding TestListSummaryCollection}">-->
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </DockPanel>
+                    <Button x:Name="button" Content="Query Users" HorizontalAlignment="Left" Margin="12,35,0,0" VerticalAlignment="Top" Width="121"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Exit" Height="35" Width="60" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="6,2">
+                <Grid Background="#FFE5E5E5">
+                    <Button x:Name="exitBtn" Content="Exit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="70" Click="exitBtn_Click"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
