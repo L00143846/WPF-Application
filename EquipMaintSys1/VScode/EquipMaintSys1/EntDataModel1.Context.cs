@@ -32,6 +32,5 @@ namespace EquipMaintSys1
         public virtual DbSet<Fault_Log> Fault_Log { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Maintenance_Schedule> Maintenance_Schedule { get; set; }
-        public object Item { get; internal set; }
     }
 }
