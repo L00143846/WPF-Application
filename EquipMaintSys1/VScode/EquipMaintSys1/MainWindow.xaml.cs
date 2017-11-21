@@ -30,9 +30,14 @@ namespace EquipMaintSys1
     {
         static string conString = @"data source = 172.28.134.1; initial catalog = L00143846_EquiptMaintSys1; persist security info=True;user id = j.mcdaid; password=***********;pooling=False;MultipleActiveResultSets=True;App=EntityFramework";
         SqlConnection con = new SqlConnection(conString);
+        int x = 0;
+        string y = "z";
 
         public MainWindow()
-        { InitializeComponent(); }
+        {
+            InitializeComponent();
+            cbo_Selection.Visibility.Equals(false);
+        }
 
         private void exitBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -40,53 +45,88 @@ namespace EquipMaintSys1
             Environment.Exit(0);
         }
 
-        private void ComboBoxItem_Selected(object sender, RoutedEventArgs e)
-        {
 
+
+        #region adminTabBtnSecection
+        private void queryBreakBtn_Click(object sender, RoutedEventArgs e)
+        {
+            x = 1;
+            cbo_Selection.Visibility.Equals(true);
+        }
+
+        private void queryMaintBtn_Click(object sender, RoutedEventArgs e)
+        {
+            x = 2;
+            cbo_Selection.Visibility.Equals(true);
+        }
+
+        private void queryCompBtn_Click(object sender, RoutedEventArgs e)
+        {
+            x = 3;
+            cbo_Selection.Visibility.Equals(true);
+        }
+
+        private void queryUsersBtn_Click(object sender, RoutedEventArgs e)
+        {
+            x = 4;
+            cbo_Selection.Visibility.Equals(true);
+        }
+        public void addBtn_Click(object sender, RoutedEventArgs e)
+        {
+            x = 5;
+            cbo_Selection.Visibility.Equals(true);
+            //con.Open();
+            //SqlCommand commObject1 = new SqlCommand("select Name from Item", con);
+
+            //// L00143846_EquiptMaintSys1Entities db = new L00143846_EquiptMaintSys1Entities();
+            //// using (L00143846_EquiptMaintSys1Entities db = new L00143846_EquiptMaintSys1Entities())
+            //try
+            //{
+            //    //SqlDataAdapter sda = new SqlDataAdapter("select Name from Item", con);
+            //    SqlDataReader dr = commObject1.ExecuteReader();
+            //    while (dr.Read())
+            //    {
+            //        //ListViewItem y = new ListViewItem(dr["Names"].ToString());
+            //        //tblkOutput.ToString();
+            //        //lbxOutput.ToString();
+            //    }
+            //    //DataTable dt = new DataTable();
+            //    //sda.Fill(dt);
+            //    //cbo_Selection.Items.Add(dt);
+            //}// end try
+
+            //catch (Exception ex)
+            //{ MessageBox.Show(ex.Message); }// end catch
+
+            //finally
+            //{ con.Close(); }//end finally
+        }
+
+        private void archiveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            x = 6;
         }
 
 
 
-        public void addBtn_Click(object sender, RoutedEventArgs e)
+
+
+
+
+
+
+        #endregion  adminTabBtnSecection
+
+
+        #region ComboBox Selection Change
+        private void cbo_Selection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            con.Open();
-            //connection object
+          //  if (cbo_Selection_SelectionChanged
 
-            //command object
-            SqlCommand commObject1 = new SqlCommand("select Name from Item", con);
-
-            // L00143846_EquiptMaintSys1Entities db = new L00143846_EquiptMaintSys1Entities();
-            // using (L00143846_EquiptMaintSys1Entities db = new L00143846_EquiptMaintSys1Entities())
-            try
-            {
-                //SqlDataAdapter sda = new SqlDataAdapter("select Name from Item", con);
+        }
 
 
-                SqlDataReader dr = commObject1.ExecuteReader();
-
-                while (dr.Read())
-                {
-                    //ListViewItem y = new ListViewItem(dr["Names"].ToString());
-                    tblkOutput.ToString();
-                }
-
-                //DataTable dt = new DataTable();
-                //sda.Fill(dt);
-                //cbo_Selection.Items.Add(dt);
-
-            }// end try
-
-            catch (Exception ex)
-                { MessageBox.Show(ex.Message); }// end catch
-
-            finally
-                {
-                //connectionObject1.Close();
-                //con.Close();
-                }//end finally
-        }// end addBtn_Click
-
-
+        #endregion ComboBox Selection Change
     }// end main
     internal class comboBox_Selection
     {

@@ -39,19 +39,24 @@
                         <ColumnDefinition Width="457*"/>
                     </Grid.ColumnDefinitions>
                     <Button x:Name="adminBtn" Content="Submit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="71" Grid.Column="1"/>
-                    <Button x:Name="addBtn" Content="Add Item" HorizontalAlignment="Left" Margin="138,35,0,0" VerticalAlignment="Top" Width="121" Height="20" Grid.ColumnSpan="2"/>
-                    <Button x:Name="archiveBtn" Content="Archive Item" HorizontalAlignment="Left" Margin="55,35,0,0" VerticalAlignment="Top" Width="121" Height="20" Grid.Column="1"/>
-                    <Button x:Name="queryBreakBtn" Content="Query Breakdown's" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Width="121"/>
-                    <Button x:Name="queryMaintBtn" Content="Query Maintenance" HorizontalAlignment="Left" Margin="138,10,0,0" VerticalAlignment="Top" Width="121" Grid.ColumnSpan="2"/>
-                    <Button x:Name="queryCompBtn" Content="Query Components" Grid.Column="1" HorizontalAlignment="Left" Margin="55,10,0,0" VerticalAlignment="Top" Width="121"/>
-                    <ComboBox x:Name="cbo_Selection" HorizontalAlignment="Left" Margin="251,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1">
+                    <Button x:Name="addBtn" Content="Add Item" HorizontalAlignment="Left" Margin="138,35,0,0" VerticalAlignment="Top" Width="121" Height="20" Grid.ColumnSpan="2" Click="addBtn_Click"/>
+                    <Button x:Name="archiveBtn" Content="Archive Item" HorizontalAlignment="Left" Margin="55,35,0,0" VerticalAlignment="Top" Width="121" Height="20" Grid.Column="1" Click="archiveBtn_Click"/>
+                    <Button x:Name="queryBreakBtn" Content="Query Breakdown's" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Width="121" Click="queryBreakBtn_Click"/>
+                    <Button x:Name="queryMaintBtn" Content="Query Maintenance" HorizontalAlignment="Left" Margin="138,10,0,0" VerticalAlignment="Top" Width="121" Grid.ColumnSpan="2" Click="queryMaintBtn_Click"/>
+                    <Button x:Name="queryCompBtn" Content="Query Components" Grid.Column="1" HorizontalAlignment="Left" Margin="55,10,0,0" VerticalAlignment="Top" Width="121" Click="queryCompBtn_Click"/>
+                    <ComboBox x:Name="cbo_Selection" HorizontalAlignment="Left" Margin="251,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" SelectionChanged="cbo_Selection_SelectionChanged" Visibility="Collapsed">
+                        <ComboBoxItem x:Name="cbo_Choose" Content="Choose" HorizontalAlignment="Left" Width="118"/>
+                        <ComboBoxItem x:Name="cbo_Equiptment" Content="Equiptment" HorizontalAlignment="Left" Width="118"/>
+                        <ComboBoxItem x:Name="cbo_Component" Content="Componemt" HorizontalAlignment="Left" Width="118"/>
+                        <ComboBoxItem x:Name="cbo_Employee" Content="Employee" HorizontalAlignment="Left" Width="118"/>
+                        <ComboBoxItem x:Name="cbo_Contractor" Content="Contractor" HorizontalAlignment="Left" Width="118"/>
 
                     </ComboBox>
 
 
 
                     <DockPanel x:Name="dpAdmin" HorizontalAlignment="Left" Height="336" LastChildFill="False" Margin="10,60,0,0" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="2">
-                        <ListView x:Name="listV_data" Height="306" VerticalAlignment="Top" Width="619" ItemsSource="{Binding TestListSummaryCollection}" Margin="0,30,0,0">
+                        <ListView x:Name="listV_data" Height="306" VerticalAlignment="Top" Width="619" Margin="0,30,0,0">
                             <!--<ListView x:Name="listView" Height="320" VerticalAlignment="Top" Width="488" ItemsSource="{Binding TestListSummaryCollection}">-->
                             <ListView.View>
                                 <GridView>
@@ -60,8 +65,7 @@
                             </ListView.View>
                         </ListView>
                     </DockPanel>
-                    <Button x:Name="button" Content="Query Users" HorizontalAlignment="Left" Margin="12,35,0,0" VerticalAlignment="Top" Width="121"/>
-                    <TextBlock x:Name="tblkOutput" HorizontalAlignment="Left" Margin="133,148,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="145" Width="284"/>
+                    <Button x:Name="queryUsersBtn" Content="Query Users" HorizontalAlignment="Left" Margin="12,35,0,0" VerticalAlignment="Top" Width="121" Click="queryUsersBtn_Click"/>
 
                 </Grid>
             </TabItem>
