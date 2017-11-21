@@ -13,23 +13,39 @@
                     <Button x:Name="searchBtn" Content="Submit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="70"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Faults" Height="35" Width="60" VerticalAlignment="Top" Padding="6,2">
+            <TabItem Header="Faults" Height="35" Width="60" VerticalAlignment="Top" Padding="6,2" Initialized="TabItem_Initialized">
                 <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="13*"/>
+                        <RowDefinition Height="45*"/>
+                    </Grid.RowDefinitions>
                     <Button x:Name="faultsBtn" Content="Submit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="70"/>
-                    <DockPanel x:Name="dpFault" HorizontalAlignment="Left" Height="336" LastChildFill="False" Margin="10,60,0,0" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="2">
-                        <ListView x:Name="listV_fault_data" Height="306" VerticalAlignment="Top" Width="619" ItemsSource="{Binding TestListSummaryCollection}" Margin="0,30,0,0">
-                            <!--<ListView x:Name="listView" Height="320" VerticalAlignment="Top" Width="488" ItemsSource="{Binding TestListSummaryCollection}">-->
+                    <DockPanel x:Name="dpFault" Height="336" Width="646" Margin="10,60,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" LastChildFill="False" Grid.RowSpan="1">
+                        <TextBox x:Name="tbxFaultDetail" Width="645" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="Enter fault description here" GotFocus="tbxFaultDetail_GotFocus" Height="32"/>
+                        <ListView x:Name="listV_fault_data" Width="644" Margin="0,0,0,0" HorizontalAlignment="Left" ItemsSource="{Binding TestListSummaryCollection}" Height="336" VerticalAlignment="Bottom">
+                            <ListView.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="-1"/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ListView.RenderTransform>
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
+
                     </DockPanel>
-                    <Button x:Name="reportFaultBtn" Content="Report a Fault" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Width="121"/>
-                    <Button x:Name="updateFaultBtn" Content="Update a Fault" HorizontalAlignment="Left" Margin="138,10,0,0" VerticalAlignment="Top" Width="121"/>
-                    <Button x:Name="resolveFaultBtn" Content="Resolve a Fault" HorizontalAlignment="Left" Margin="264,10,0,0" VerticalAlignment="Top" Width="121"/>
-                    <ComboBox x:Name="cbo_Fault" HorizontalAlignment="Left" Margin="460,10,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Button x:Name="reportFaultBtn" Content="Report a Fault" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Width="121" Click="reportFaultBtn_Click"/>
+                    <Button x:Name="updateFaultBtn" Content="Update a Fault" HorizontalAlignment="Left" Margin="138,10,0,0" VerticalAlignment="Top" Width="121" Click="updateFaultBtn_Click"/>
+                    <Button x:Name="resolveFaultBtn" Content="Resolve a Fault" HorizontalAlignment="Left" Margin="264,10,0,0" VerticalAlignment="Top" Width="121" Click="resolveFaultBtn_Click"/>
+                    <ComboBox x:Name="cbo_Fault" HorizontalAlignment="Left" Margin="460,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbo_Fault_SelectionChanged">
+                        //
+                        <ComboBoxItem Content="Test Item" HorizontalAlignment="Left" Width="118"/>
+                    </ComboBox>
                 </Grid>
             </TabItem>
             <TabItem Header="Admin" Height="35" Width="60" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="6,2" >
@@ -45,7 +61,7 @@
                     <Button x:Name="queryMaintBtn" Content="Query Maintenance" HorizontalAlignment="Left" Margin="138,10,0,0" VerticalAlignment="Top" Width="121" Grid.ColumnSpan="2" Click="queryMaintBtn_Click"/>
                     <Button x:Name="queryCompBtn" Content="Query Components" Grid.Column="1" HorizontalAlignment="Left" Margin="55,10,0,0" VerticalAlignment="Top" Width="121" Click="queryCompBtn_Click"/>
                     <ComboBox x:Name="cbo_Selection" HorizontalAlignment="Left" Margin="251,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" SelectionChanged="cbo_Selection_SelectionChanged" Visibility="Collapsed">
-                        <ComboBoxItem x:Name="cbo_Choose" Content="Choose" HorizontalAlignment="Left" Width="118"/>
+                        <ComboBoxItem x:Name="cbo_Choose" Content="" HorizontalAlignment="Left" Width="118"/>
                         <ComboBoxItem x:Name="cbo_Equiptment" Content="Equiptment" HorizontalAlignment="Left" Width="118"/>
                         <ComboBoxItem x:Name="cbo_Component" Content="Componemt" HorizontalAlignment="Left" Width="118"/>
                         <ComboBoxItem x:Name="cbo_Employee" Content="Employee" HorizontalAlignment="Left" Width="118"/>
@@ -56,7 +72,7 @@
 
 
                     <DockPanel x:Name="dpAdmin" HorizontalAlignment="Left" Height="336" LastChildFill="False" Margin="10,60,0,0" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="2">
-                        <ListView x:Name="listV_data" Height="306" VerticalAlignment="Top" Width="619" Margin="0,30,0,0">
+                        <ListView x:Name="listV_data" Height="306" VerticalAlignment="Bottom" Width="619" Margin="0,30,0,0">
                             <!--<ListView x:Name="listView" Height="320" VerticalAlignment="Top" Width="488" ItemsSource="{Binding TestListSummaryCollection}">-->
                             <ListView.View>
                                 <GridView>
