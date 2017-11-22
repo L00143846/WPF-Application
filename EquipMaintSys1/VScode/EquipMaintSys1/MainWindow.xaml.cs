@@ -28,8 +28,10 @@ namespace EquipMaintSys1
     /// </summary>
    public partial class MainWindow : Window
     {
-        static string conString = @"data source = 172.28.134.1; initial catalog = L00143846_EquiptMaintSys1; persist security info=True;user id = j.mcdaid; password=***********;pooling=False;MultipleActiveResultSets=True;App=EntityFramework";
+        #region -- DATABASE CONNECTION
+        static string conString = @"Data Source=172.28.134.1;Initial Catalog=L00143846_EquiptMaintSys1;Persist Security Info=True;User ID=j.mcdaid;Password=s4VrsthkQb;Pooling=False";
         SqlConnection con = new SqlConnection(conString);
+        #endregion -- DATABASE CONNECTION
         #region -- VARIABLES
         // fault tab variables
         int fauB = 0;
@@ -66,13 +68,11 @@ namespace EquipMaintSys1
             admB = 2;
             cbo_Selection.Visibility = System.Windows.Visibility.Visible;
         }
-
         private void queryCompBtn_Click(object sender, RoutedEventArgs e)
         {
             admB = 3;
             cbo_Selection.Visibility = System.Windows.Visibility.Visible;
         }
-
         private void queryUsersBtn_Click(object sender, RoutedEventArgs e)
         {
             admB = 4;
@@ -82,11 +82,38 @@ namespace EquipMaintSys1
         {
             admB = 5;
             cbo_Selection.Visibility = System.Windows.Visibility.Visible;
+
+
+            fauB = 1;
+            cbo_Fault.Visibility = System.Windows.Visibility.Visible;
+
+            try
+            {
+                con.Open();
+                //SqlCommand commObject1 = new SqlCommand("select Name from Equiptment", con);
+                SqlDataAdapter commObject1 = new SqlDataAdapter("select * from Item", con);
+                DataTable dt = new DataTable();
+                commObject1.Fill(dt);
+                foreach (DataRow row in dt.Rows)
+                {
+                    cbo_Fault.Items.Add(row["Name"].ToString());
+                    listV_fault_data.Items.Add(row["Name"].ToString());
+                }
+            }// end try
+
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message); }// end catch
+
+            finally
+            { con.Close(); }//end finally
+
+            // L00143846_EquiptMaintSys1Entities db = new L00143846_EquiptMaintSys1Entities();
+            // using (L00143846_EquiptMaintSys1Entities db = new L00143846_EquiptMaintSys1Entities())
             //con.Open();
             //SqlCommand commObject1 = new SqlCommand("select Name from Item", con);
 
-            //// L00143846_EquiptMaintSys1Entities db = new L00143846_EquiptMaintSys1Entities();
-            //// using (L00143846_EquiptMaintSys1Entities db = new L00143846_EquiptMaintSys1Entities())
+            // L00143846_EquiptMaintSys1Entities db = new L00143846_EquiptMaintSys1Entities();
+            // using (L00143846_EquiptMaintSys1Entities db = new L00143846_EquiptMaintSys1Entities())
             //try
             //{
             //    //SqlDataAdapter sda = new SqlDataAdapter("select Name from Item", con);
@@ -102,11 +129,7 @@ namespace EquipMaintSys1
             //    //cbo_Selection.Items.Add(dt);
             //}// end try
 
-            //catch (Exception ex)
-            //{ MessageBox.Show(ex.Message); }// end catch
 
-            //finally
-            //{ con.Close(); }//end finally
         }
 
         private void archiveBtn_Click(object sender, RoutedEventArgs e)
