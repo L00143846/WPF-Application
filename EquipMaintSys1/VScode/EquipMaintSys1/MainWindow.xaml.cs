@@ -96,8 +96,9 @@ namespace EquipMaintSys1
                 commObject1.Fill(dt);
                 foreach (DataRow row in dt.Rows)
                 {
-                    cbo_Fault.Items.Add(row["Name"].ToString());
-                    listV_fault_data.Items.Add(row["Name"].ToString());
+                    cbo_Selection.Items.Add(row["Name"].ToString());
+                    //cbo_Fault.Items.Add(row["Name"].ToString());
+                    //listV_fault_data.Items.Add(row["Name"].ToString());
                 }
             }// end try
 
@@ -174,8 +175,6 @@ namespace EquipMaintSys1
             fauB = 1;
             cbo_Fault.Visibility = System.Windows.Visibility.Visible;
 
-            //// L00143846_EquiptMaintSys1Entities db = new L00143846_EquiptMaintSys1Entities();
-            //// using (L00143846_EquiptMaintSys1Entities db = new L00143846_EquiptMaintSys1Entities())
             try
             {
                 con.Open();
@@ -185,20 +184,9 @@ namespace EquipMaintSys1
                 commObject1.Fill(dt);
                 foreach (DataRow row in dt.Rows)
                 {
-                    listV_fault_data.Items.Add(row["Name"].ToString());
-                }
-
-                //    //SqlDataAdapter sda = new SqlDataAdapter("select Name from Item", con);
-                //    SqlDataReader dr = commObject1.ExecuteReader();
-                //    while (dr.Read())
-                //    {
-                //        //ListViewItem y = new ListViewItem(dr["Names"].ToString());
-                //        //tblkOutput.ToString();
-                //        //lbxOutput.ToString();
-                //    }
-                //    //DataTable dt = new DataTable();
-                //    //sda.Fill(dt);
-                //    //cbo_Selection.Items.Add(dt);
+                    cbo_Fault.Items.Add(row["Name"].ToString());
+                    //listV_fault_data.Items.Add(row["Name"].ToString());
+                }// end foreach
             }// end try
 
             catch (Exception ex)
@@ -208,24 +196,64 @@ namespace EquipMaintSys1
             { con.Close(); }//end finally
 
         }
-
         private void updateFaultBtn_Click(object sender, RoutedEventArgs e)
         {
             fauB = 2;
             cbo_Fault.Visibility = System.Windows.Visibility.Visible;
 
-        }
+            try
+            {
+                con.Open();
+                //SqlCommand commObject1 = new SqlCommand("select Name from Equiptment", con);
+                SqlDataAdapter commObject1 = new SqlDataAdapter("select Name from Equiptment", con);
+                DataTable dt = new DataTable();
+                commObject1.Fill(dt);
+                foreach (DataRow row in dt.Rows)
+                {
+                    cbo_Fault.Items.Add(row["Name"].ToString());
+                    //listV_fault_data.Items.Add(row["Name"].ToString());
+                }// end foreach
+            }// end try
 
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message); }// end catch
+
+            finally
+            { con.Close(); }//end finally
+
+        }
         private void resolveFaultBtn_Click(object sender, RoutedEventArgs e)
         {
             fauB = 3;
             cbo_Fault.Visibility = System.Windows.Visibility.Visible;
-        }        
 
+            try
+            {
+                con.Open();
+                //SqlCommand commObject1 = new SqlCommand("select Name from Equiptment", con);
+                SqlDataAdapter commObject1 = new SqlDataAdapter("select Name from Equiptment", con);
+                DataTable dt = new DataTable();
+                commObject1.Fill(dt);
+                foreach (DataRow row in dt.Rows)
+                {
+                    cbo_Fault.Items.Add(row["Name"].ToString());
+                    //listV_fault_data.Items.Add(row["Name"].ToString());
+                }// end foreach
+            }// end try
+
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message); }// end catch
+
+            finally
+            { con.Close(); }//end finally
+        }        
         private void cbo_Fault_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             faultsBtn.Visibility = System.Windows.Visibility.Visible;
-            tbxFaultDetail.Visibility = System.Windows.Visibility.Visible;
+            if(fauB == 1)
+            {            
+                tbxFaultDetail.Visibility = System.Windows.Visibility.Visible;
+            }
 
         }
 
@@ -242,6 +270,46 @@ namespace EquipMaintSys1
         private void tbxFaultDetail_GotFocus(object sender, RoutedEventArgs e)
         {
             tbxFaultDetail.Text = string.Empty;
+        }
+        
+
+        private void faultsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(fauB==1)
+            {
+
+            }
+            else if(fauB ==2)
+            {
+
+                try
+                {
+                    con.Open();
+                    //SqlCommand commObject1 = new SqlCommand("select Name from Equiptment", con);
+                    SqlDataAdapter commObject1 = new SqlDataAdapter("select Event_Num, Name, Component, Technician, Fault_Description, Start_Date_Time, End_Date_Time from Fault_Log", con);
+                    DataTable dt = new DataTable();
+                    commObject1.Fill(dt);
+
+                    listV_fault_data.Items.Clear();
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        //cbo_Fault.Items.Add(row["Name"].ToString());
+                        listV_fault_data.Items.Add(row["Name"].ToString());
+                    }// end foreach
+                }// end try
+
+                catch (Exception ex)
+                { MessageBox.Show(ex.Message); }// end catch
+
+                finally
+                { con.Close(); }//end finally
+
+            }
+            else if (fauB == 3)
+            {
+
+            }
+
         }
         #endregion FAULT TAB
     }// end main

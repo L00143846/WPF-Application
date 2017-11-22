@@ -19,10 +19,10 @@
                         <RowDefinition Height="13*"/>
                         <RowDefinition Height="45*"/>
                     </Grid.RowDefinitions>
-                    <Button x:Name="faultsBtn" Content="Submit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="70"/>
+                    <Button x:Name="faultsBtn" Content="Submit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="70" Click="faultsBtn_Click"/>
                     <DockPanel x:Name="dpFault" Height="336" Width="646" Margin="10,60,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" LastChildFill="False" Grid.RowSpan="1">
                         <TextBox x:Name="tbxFaultDetail" Width="645" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="Enter fault description here" GotFocus="tbxFaultDetail_GotFocus" Height="32"/>
-                        <ListView x:Name="listV_fault_data" Width="644" Margin="0,0,0,0" HorizontalAlignment="Left" Height="336" VerticalAlignment="Bottom">
+                        <ListView x:Name="listV_fault_data" Width="644" Margin="0,0,0,0" HorizontalAlignment="Left" Height="303" VerticalAlignment="Bottom">
                             <ListView.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform ScaleX="-1"/>
@@ -33,7 +33,13 @@
                             </ListView.RenderTransform>
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn/>
+                                    <GridViewColumn Header="Incindent#"/>
+                                    <GridViewColumn Header="Machine"/>
+                                    <GridViewColumn Header="Component"/>
+                                    <GridViewColumn Header="Technician"/>
+                                    <GridViewColumn Header="Details"/>
+                                    <GridViewColumn Header="Start Date/Time"/>
+                                    <GridViewColumn Header="End Date/Time"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
