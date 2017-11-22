@@ -284,9 +284,11 @@ namespace EquipMaintSys1
 
                 try
                 {
+                    string machine = cbo_Fault.SelectedItem.ToString();
+                    string query = string.Format("select Event_Num, Name, Component, Technician, Fault_Description, Start_Date_Time, End_Date_Time from Fault_Log where Name='{0}'", machine);
                     con.Open();
                     //SqlCommand commObject1 = new SqlCommand("select Name from Equiptment", con);
-                    SqlDataAdapter commObject1 = new SqlDataAdapter("select Event_Num, Name, Component, Technician, Fault_Description, Start_Date_Time, End_Date_Time from Fault_Log", con);
+                    SqlDataAdapter commObject1 = new SqlDataAdapter(query, con);
                     DataTable dt = new DataTable();
                     commObject1.Fill(dt);
 
@@ -294,7 +296,10 @@ namespace EquipMaintSys1
                     foreach (DataRow row in dt.Rows)
                     {
                         //cbo_Fault.Items.Add(row["Name"].ToString());
-                        listV_fault_data.Items.Add(row["Name"].ToString());
+                        //listV_fault_data.Items.Add(row["Incindent#"].ToString());
+                        //listV_fault_data.sub
+                        listV_fault_data = new listV_fault_data(row["Name"].ToString());
+                        listV_fault_data.su
                     }// end foreach
                 }// end try
 
