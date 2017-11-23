@@ -115,7 +115,29 @@ namespace EquipMaintSys1
             #region REGION -- report a fault
             if (fauB==1 && fauTbx ==1)
             {
-                // write fault to database
+                string details = string.Format(tbxFaultDetail.Text);
+                try
+                {
+                    string machine = cbo_Fault.SelectedItem.ToString();
+                    int log_num = 1004;
+                    string query = string.Format("select Event_Num, Name, Component, Technician, Fault_Description, Start_Date_Time, End_Date_Time from Fault_Log where Name='{0}'", machine);
+                    con.Open();
+                    //SqlCommand commObject1 = new SqlCommand("select Name from Equiptment", con);
+                    SqlDataAdapter commObject1 = new SqlDataAdapter(query, con);
+                    DataTable dt = new DataTable();
+                    commObject1.Fill(dt);
+
+                    listV_fault_data.Items.Clear();
+                    foreach (DataRow row in dt.Rows)
+                    {
+                    }// end FOREACH
+                }// end TRY
+
+                catch (Exception ex)
+                { MessageBox.Show(ex.Message); }// end catch
+
+                finally
+                { con.Close(); }//end finally
 
             }// end IF
             #endregion  REGION -- report a fault
@@ -124,14 +146,6 @@ namespace EquipMaintSys1
             {
                 try
                 {
-                  //  listV_fault_data.Visibility = Visibility.Visible;
-                        //listV_fault_data = new ListViewItem(dr["pk_Location_ID"].ToString());
-                        //listV_fault_data.SubItems.Add(dr["Name"].ToString());
-                        //listV_fault_data.SubItems.Add(dr["Component"].ToString());
-                        //listV_fault_data.SubItems.Add(dr["Technician"].ToString());
-                        //listView1.Items.Add(listV_fault_data);
-                    
-
                     string machine = cbo_Fault.SelectedItem.ToString();
                     string query = string.Format("select Event_Num, Name, Component, Technician, Fault_Description, Start_Date_Time, End_Date_Time from Fault_Log where Name='{0}'", machine);
                     con.Open();
@@ -143,11 +157,16 @@ namespace EquipMaintSys1
                     listV_fault_data.Items.Clear();
                     foreach (DataRow row in dt.Rows)
                     {
-
-
+                        listV_fault_data.Items.Add(row.ToString());
+                        //ListViewItem entry = new ListViewItem(row[0].ToString());
+                        //for (int i = 1; i < dt.Columns.Count; i++)
+                        //{
+                        //    entry.su
+                        //}
+                        //faultGridView.
                         //cbo_Fault.Items.Add(row["Name"].ToString());
-                        //listV_fault_data.Items.Add(row["Incindent#"].ToString());
-                        //listV_fault_data.ItemsSource = ;
+                        //listV_fault_data.Items.Add(row.ToString());
+                        //listV_fault_data.ItemsSource = row.ToString();
                         //listV_fault_data.it
                         //listV_fault_data = new listV_fault_data(row["Name"].ToString());
                         //listV_fault_data.su
@@ -261,18 +280,7 @@ namespace EquipMaintSys1
             if(admB == 1 && admMachineSelected == 1) { }
             else if (admB == 2 && admMachineSelected == 1)
             {
-                var adminGridView = new GridView();
-                this.listV_data.View = adminGridView();
-                adminGridView.Columns.Add(new GridViewColumn { Header = "Name", DisplayMemberBinding = new Binding("Name") });
-                adminGridView.Columns.Add(new GridViewColumn { Header = "Equiptment", DisplayMemberBinding = new Binding("Equiptment") });
-                adminGridView.Columns.Add(new GridViewColumn { Header = "Downtime", DisplayMemberBinding = new Binding("Downtime") });
-                adminGridView.Columns.Add(new GridViewColumn { Header = "Implementor", DisplayMemberBinding = new Binding("Implementor") });
-                adminGridView.Columns.Add(new GridViewColumn { Header = "Job_Description", DisplayMemberBinding = new Binding("Job_Description") });
-                adminGridView.Columns.Add(new GridViewColumn { Header = "Frequency", DisplayMemberBinding = new Binding("Frequency") });
-                adminGridView.Columns.Add(new GridViewColumn { Header = "Start_Date_Time", DisplayMemberBinding = new Binding("Start_Date_Time") });
-                adminGridView.Columns.Add(new GridViewColumn { Header = "End_Date_Time", DisplayMemberBinding = new Binding("End_Date_Time") });
-                adminGridView.Columns.Add(new GridViewColumn { Header = "Archived", DisplayMemberBinding = new Binding("Archived") });
-                adminGridView.Columns.Add(new GridViewColumn { Header = "Archived_by", DisplayMemberBinding = new Binding("Archived_by") });
+
 
             }
             else if (admB == 3 && admMachineSelected == 1) { }
