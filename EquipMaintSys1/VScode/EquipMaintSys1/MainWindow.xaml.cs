@@ -120,7 +120,7 @@ namespace EquipMaintSys1
                 {
                     string machine = cbo_Fault.SelectedItem.ToString();
                     int log_num = 1004;
-                    string query = string.Format("select Event_Num, Name, Component, Technician, Fault_Description, Start_Date_Time, End_Date_Time from Fault_Log where Name='{0}'", machine);
+                    string query = string.Format("INSERT INTO dbo.Fault_Log where Name='{0}'", machine);
                     con.Open();
                     //SqlCommand commObject1 = new SqlCommand("select Name from Equiptment", con);
                     SqlDataAdapter commObject1 = new SqlDataAdapter(query, con);
