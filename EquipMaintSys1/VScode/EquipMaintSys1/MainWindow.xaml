@@ -8,21 +8,27 @@
         Title="EMSystems" Height="500" Width="700">
     <Grid>
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="449" Margin="10,10,0,0" VerticalAlignment="Top" Width="672">
-            <TabItem Header="Search" Height="35" Width="60" Padding="6,2">
+            <TabItem x:Name="Search_Tab" Header="Search" Height="35" Width="60" Padding="6,2">
                 <Grid Background="#FFE5E5E5">
                     <Button x:Name="searchBtn" Content="Submit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="70"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Faults" Height="35" Width="60" VerticalAlignment="Top" Padding="6,2" Initialized="TabItem_Initialized">
+            <TabItem x:Name="Fault_Tab" Header="Faults" Height="35" Width="60" VerticalAlignment="Top" Padding="6,2" Initialized="Fault_Tab_Initialized">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="13*"/>
                         <RowDefinition Height="45*"/>
                     </Grid.RowDefinitions>
                     <Button x:Name="faultsBtn" Content="Submit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="70" Click="faultsBtn_Click"/>
+
+                    <Button x:Name="reportFaultBtn" Content="Report a Fault" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Width="121" Click="reportFaultBtn_Click"/>
+                    <Button x:Name="updateFaultBtn" Content="Update a Fault" HorizontalAlignment="Left" Margin="138,10,0,0" VerticalAlignment="Top" Width="121" Click="updateFaultBtn_Click"/>
+                    <Button x:Name="resolveFaultBtn" Content="Resolve a Fault" HorizontalAlignment="Left" Margin="264,10,0,0" VerticalAlignment="Top" Width="121" Click="resolveFaultBtn_Click"/>
+                    <ComboBox x:Name="cbo_Fault" HorizontalAlignment="Left" Margin="460,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbo_Fault_SelectionChanged">
+                    </ComboBox>
                     <DockPanel x:Name="dpFault" Height="336" Width="646" Margin="10,60,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" LastChildFill="False" Grid.RowSpan="1">
-                        <TextBox x:Name="tbxFaultDetail" Width="645" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="Enter fault description here" TextWrapping="Wrap" GotFocus="tbxFaultDetail_GotFocus" Height="32"/>
-                        <ListView x:Name="listV_fault_data" Width="644" Margin="0,0,0,0" HorizontalAlignment="Left" Height="303" VerticalAlignment="Bottom">
+                        <TextBox x:Name="tbxFaultDetail" Width="645" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="Enter fault description here, once satisified click 'Submit'" TextWrapping="Wrap" GotFocus="tbxFaultDetail_GotFocus" Height="32"/>
+                        <ListView x:Name="listV_fault_data" Width="644" Margin="0,33,0,0" HorizontalAlignment="Left">
                             <ListView.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform ScaleX="-1"/>
@@ -33,26 +39,21 @@
                             </ListView.RenderTransform>
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Incindent#"/>
-                                    <GridViewColumn Header="Machine"/>
-                                    <GridViewColumn Header="Component"/>
-                                    <GridViewColumn Header="Technician"/>
-                                    <GridViewColumn Header="Details"/>
-                                    <GridViewColumn Header="Start Date/Time"/>
-                                    <GridViewColumn Header="End Date/Time"/>
+                                    <GridViewColumn Header="Incindent#" DisplayMemberBinding="{Binding Incindent#}"/>
+                                    <GridViewColumn Header="Machine" DisplayMemberBinding="{Binding Machine}"/>
+                                    <GridViewColumn Header="Component" DisplayMemberBinding="{Binding Component}"/>
+                                    <GridViewColumn Header="Technician" DisplayMemberBinding="{Binding Technician}"/>
+                                    <GridViewColumn Header="Details" DisplayMemberBinding="{Binding Details}"/>
+                                    <GridViewColumn Header="Start Date/Time" DisplayMemberBinding="{Binding Start Date/Time}"/>
+                                    <GridViewColumn Header="End Date/Time" DisplayMemberBinding="{Binding End Date/Time}"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
 
                     </DockPanel>
-                    <Button x:Name="reportFaultBtn" Content="Report a Fault" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Width="121" Click="reportFaultBtn_Click"/>
-                    <Button x:Name="updateFaultBtn" Content="Update a Fault" HorizontalAlignment="Left" Margin="138,10,0,0" VerticalAlignment="Top" Width="121" Click="updateFaultBtn_Click"/>
-                    <Button x:Name="resolveFaultBtn" Content="Resolve a Fault" HorizontalAlignment="Left" Margin="264,10,0,0" VerticalAlignment="Top" Width="121" Click="resolveFaultBtn_Click"/>
-                    <ComboBox x:Name="cbo_Fault" HorizontalAlignment="Left" Margin="460,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbo_Fault_SelectionChanged">
-                    </ComboBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Admin" Height="35" Width="60" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="6,2" >
+            <TabItem x:Name="Admin_Tab" Header="Admin" Height="35" Width="60" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="6,2" >
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="209*"/>
@@ -64,10 +65,10 @@
                     <Button x:Name="queryBreakBtn" Content="Query Breakdown's" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Width="121" Click="queryBreakBtn_Click"/>
                     <Button x:Name="queryMaintBtn" Content="Query Maintenance" HorizontalAlignment="Left" Margin="138,10,0,0" VerticalAlignment="Top" Width="121" Grid.ColumnSpan="2" Click="queryMaintBtn_Click"/>
                     <Button x:Name="queryCompBtn" Content="Query Components" Grid.Column="1" HorizontalAlignment="Left" Margin="55,10,0,0" VerticalAlignment="Top" Width="121" Click="queryCompBtn_Click"/>
-                    <ComboBox x:Name="cbo_Selection" HorizontalAlignment="Left" Margin="251,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" SelectionChanged="cbo_Selection_SelectionChanged" Visibility="Collapsed">
+                    <ComboBox x:Name="cbo_Selection" HorizontalAlignment="Left" Margin="251,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" SelectionChanged="cbo_Selection_SelectionChanged"/>
 
 
-                    </ComboBox>
+
 
 
 
@@ -85,7 +86,7 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Exit" Height="35" Width="60" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="6,2">
+            <TabItem x:Name="Exit_Tab" Header="Exit" Height="35" Width="60" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="6,2">
                 <Grid Background="#FFE5E5E5">
                     <Button x:Name="exitBtn" Content="Exit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="70" Click="exitBtn_Click"/>
                 </Grid>

@@ -28,16 +28,19 @@ namespace EquipMaintSys1
     /// </summary>
    public partial class MainWindow : Window
     {
-        #region -- DATABASE CONNECTION
+        #region REGION -- DATABASE CONNECTION
         static string conString = @"Data Source=172.28.134.1;Initial Catalog=L00143846_EquiptMaintSys1;Persist Security Info=True;User ID=j.mcdaid;Password=s4VrsthkQb;Pooling=False";
         SqlConnection con = new SqlConnection(conString);
         #endregion -- DATABASE CONNECTION
-        #region -- VARIABLES
+        #region REGION -- VARIABLES
         // fault tab variables
         int fauB = 0;
+        int fauMachineSelected = 0;
+        int fauTbx = 0;
         //admin tab variables
         int admB = 0;
         string admY = "z";
+        int admMachineSelected = 0;
         #endregion -- VARIABLES
         public MainWindow()
         {
@@ -54,15 +57,14 @@ namespace EquipMaintSys1
             Close();
             Environment.Exit(0);
         }
-        #endregion EXIT TAB
+        #endregion REGION -- EXIT TAB
         #region REGION -- ADMIN TAB
-        #region adminTabBtnSecection
+        #region REGION -- adminTabBtnSecection
         private void queryBreakBtn_Click(object sender, RoutedEventArgs e)
         {
             admB = 1;
             cbo_Selection.Visibility = System.Windows.Visibility.Visible;
         }
-
         private void queryMaintBtn_Click(object sender, RoutedEventArgs e)
         {
             admB = 2;
@@ -132,49 +134,23 @@ namespace EquipMaintSys1
 
 
         }
-
         private void archiveBtn_Click(object sender, RoutedEventArgs e)
         {
             admB = 6;
         }
-
-
-
-
-
-
-
-
-
-        #endregion  adminTabBtnSecection
-
-
-        #region ComboBox Selection Change
+        #endregion  REGION -- adminTabBtnSecection
         private void cbo_Selection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             adminBtn.Visibility = System.Windows.Visibility.Visible;
-          //  if (cbo_Selection_SelectionChanged
-
+            admMachineSelected = 1;
         }
 
 
 
-
-
-
-
-
-
-
-        #endregion ComboBox Selection Change
-
-        #endregion ADMIN TAB
+        #endregion REGION -- ADMIN TAB
         #region REGION -- FAULT TAB
-        private void reportFaultBtn_Click(object sender, RoutedEventArgs e)
+        private void Fault_Tab_Initialized(object sender, EventArgs e)
         {
-            fauB = 1;
-            cbo_Fault.Visibility = System.Windows.Visibility.Visible;
-
             try
             {
                 con.Open();
@@ -195,57 +171,23 @@ namespace EquipMaintSys1
             finally
             { con.Close(); }//end finally
 
+        }
+        private void reportFaultBtn_Click(object sender, RoutedEventArgs e)
+        {
+            fauB = 1;
+            cbo_Fault.Visibility = System.Windows.Visibility.Visible;
         }
         private void updateFaultBtn_Click(object sender, RoutedEventArgs e)
         {
             fauB = 2;
             cbo_Fault.Visibility = System.Windows.Visibility.Visible;
-
-            try
-            {
-                con.Open();
-                //SqlCommand commObject1 = new SqlCommand("select Name from Equiptment", con);
-                SqlDataAdapter commObject1 = new SqlDataAdapter("select Name from Equiptment", con);
-                DataTable dt = new DataTable();
-                commObject1.Fill(dt);
-                foreach (DataRow row in dt.Rows)
-                {
-                    cbo_Fault.Items.Add(row["Name"].ToString());
-                    //listV_fault_data.Items.Add(row["Name"].ToString());
-                }// end foreach
-            }// end try
-
-            catch (Exception ex)
-            { MessageBox.Show(ex.Message); }// end catch
-
-            finally
-            { con.Close(); }//end finally
-
+            tbxFaultDetail.Visibility = System.Windows.Visibility.Collapsed;
         }
         private void resolveFaultBtn_Click(object sender, RoutedEventArgs e)
         {
             fauB = 3;
             cbo_Fault.Visibility = System.Windows.Visibility.Visible;
-
-            try
-            {
-                con.Open();
-                //SqlCommand commObject1 = new SqlCommand("select Name from Equiptment", con);
-                SqlDataAdapter commObject1 = new SqlDataAdapter("select Name from Equiptment", con);
-                DataTable dt = new DataTable();
-                commObject1.Fill(dt);
-                foreach (DataRow row in dt.Rows)
-                {
-                    cbo_Fault.Items.Add(row["Name"].ToString());
-                    //listV_fault_data.Items.Add(row["Name"].ToString());
-                }// end foreach
-            }// end try
-
-            catch (Exception ex)
-            { MessageBox.Show(ex.Message); }// end catch
-
-            finally
-            { con.Close(); }//end finally
+            tbxFaultDetail.Visibility = System.Windows.Visibility.Collapsed;
         }        
         private void cbo_Fault_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -253,37 +195,37 @@ namespace EquipMaintSys1
             if(fauB == 1)
             {            
                 tbxFaultDetail.Visibility = System.Windows.Visibility.Visible;
+                fauMachineSelected = 1;
             }
-
         }
-
-
-        
-
-        private void TabItem_Initialized(object sender, EventArgs e)
-        {
-
-
-        }
-        
-
         private void tbxFaultDetail_GotFocus(object sender, RoutedEventArgs e)
         {
             tbxFaultDetail.Text = string.Empty;
-        }
-        
+            fauTbx = 1;
 
+        }       
         private void faultsBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(fauB==1)
+            #region REGION -- report a fault
+            if (fauB==1 && fauTbx ==1)
             {
+                // write fault to database
 
-            }
-            else if(fauB ==2)
+            }// end IF
+            #endregion  REGION -- report a fault
+            #region REGION -- update a fault
+            else if (fauB == 2 && fauMachineSelected ==1)
             {
-
                 try
                 {
+                  //  listV_fault_data.Visibility = Visibility.Visible;
+                        //listV_fault_data = new ListViewItem(dr["pk_Location_ID"].ToString());
+                        //listV_fault_data.SubItems.Add(dr["Name"].ToString());
+                        //listV_fault_data.SubItems.Add(dr["Component"].ToString());
+                        //listV_fault_data.SubItems.Add(dr["Technician"].ToString());
+                        //listView1.Items.Add(listV_fault_data);
+                    
+
                     string machine = cbo_Fault.SelectedItem.ToString();
                     string query = string.Format("select Event_Num, Name, Component, Technician, Fault_Description, Start_Date_Time, End_Date_Time from Fault_Log where Name='{0}'", machine);
                     con.Open();
@@ -295,13 +237,16 @@ namespace EquipMaintSys1
                     listV_fault_data.Items.Clear();
                     foreach (DataRow row in dt.Rows)
                     {
+
+
                         //cbo_Fault.Items.Add(row["Name"].ToString());
                         //listV_fault_data.Items.Add(row["Incindent#"].ToString());
-                        //listV_fault_data.sub
-                        listV_fault_data = new listV_fault_data(row["Name"].ToString());
-                        listV_fault_data.su
-                    }// end foreach
-                }// end try
+                        //listV_fault_data.ItemsSource = ;
+                        //listV_fault_data.it
+                        //listV_fault_data = new listV_fault_data(row["Name"].ToString());
+                        //listV_fault_data.su
+                    }// end FOREACH
+                }// end TRY
 
                 catch (Exception ex)
                 { MessageBox.Show(ex.Message); }// end catch
@@ -309,13 +254,14 @@ namespace EquipMaintSys1
                 finally
                 { con.Close(); }//end finally
 
-            }
-            else if (fauB == 3)
-            {
+            }//else if (fauB == 3)
+            #endregion REGION-- update a fault
+            #region REGION -- resolve a fault
 
-            }
 
-        }
+
+            #endregion REGION -- resolve a fault
+        }// end faultsBtn_Click
         #endregion FAULT TAB
     }// end main
 }// end namespace
