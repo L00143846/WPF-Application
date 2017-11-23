@@ -40,13 +40,13 @@
                             </ListView.RenderTransform>
                             <ListView.View>
                                 <GridView x:Name="faultGridView">
-                                    <GridViewColumn Header="Incindent#" DisplayMemberBinding="{Binding Incindent#}" Width="100"/>
-                                    <GridViewColumn Header="Machine" DisplayMemberBinding="{Binding Machine}" Width="100"/>
-                                    <GridViewColumn Header="Component" DisplayMemberBinding="{Binding Component}" Width="100"/>
-                                    <GridViewColumn Header="Technician" DisplayMemberBinding="{Binding Technician}" Width="100"/>
-                                    <GridViewColumn Header="Details" DisplayMemberBinding="{Binding Details}" Width="322"/>
-                                    <GridViewColumn Header="Start Date/Time" DisplayMemberBinding="{Binding Start Date/Time}" Width="100"/>
-                                    <GridViewColumn Header="End Date/Time" DisplayMemberBinding="{Binding End Date/Time}" Width="100"/>
+                                    <GridViewColumn Header="Incindent#" DisplayMemberBinding="{Binding dt.Event_Num}" Width="100"/>
+                                    <GridViewColumn Header="Machine" DisplayMemberBinding="{Binding dt.Name}" Width="100"/>
+                                    <GridViewColumn Header="Component" DisplayMemberBinding="{Binding dt.Component}" Width="100"/>
+                                    <GridViewColumn Header="Technician" DisplayMemberBinding="{Binding dt.Technician}" Width="100"/>
+                                    <GridViewColumn Header="Details" DisplayMemberBinding="{Binding dt.Fault_Description}" Width="322"/>
+                                    <GridViewColumn Header="Start Date/Time" DisplayMemberBinding="{Binding dt.Start_Date_Time}" Width="100"/>
+                                    <GridViewColumn Header="End Date/Time" DisplayMemberBinding="{Binding dt.End_Date_Time}" Width="100"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>

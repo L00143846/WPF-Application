@@ -21,15 +21,36 @@ namespace EquipMaintSys1
     /// </summary>
     public partial class MainWindow : Window
     {
-        //
-        //
-        //MyDatabaseEntities dbEntities = new ws12sql\sqlserver2016.L00143846_EpuiptMaintSys1.dbo.Employees ();
-        //
-        //
+        MyDatabaseEntities dbEntities = new MyDatabaseEntities();
+        List<userList> = new List<User>();
+
+
         public MainWindow()
         {
             InitializeComponent();
         }
+        private void mtdLoadUsers()
+        {
+            userList.Clear();
+            foreach (var user in dbEntities.Users)
+            {
+                userList.Add(user);
+            }
+        }
+        private UserControl mtdGetUserDetails(string username, string password)
+        {
+            User userDetails = new User();
+            foreach(var user in userList)
+            {
+                if (username == user.UserName && password == user.Password)
+                {
+                    userDetails = user;
+                }
+            }
+            return userDetails;
+        }
+
+
 
         private void exitBtn_Click(object sender, RoutedEventArgs e)
         {
