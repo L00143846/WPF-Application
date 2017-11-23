@@ -33,13 +33,12 @@ namespace EquipMaintSys1
         SqlConnection con = new SqlConnection(conString);
         #endregion -- DATABASE CONNECTION
         #region REGION -- VARIABLES
-        // fault tab variables
+        // fault tab variables, the int variables are use for logic decisions
         int fauB = 0;
         int fauMachineSelected = 0;
         int fauTbx = 0;
-        //admin tab variables
+        //admin tab variables, the int variables are use for logic decisions
         int admB = 0;
-        //string admY = "z";
         int admMachineSelected = 0;
         #endregion -- VARIABLES
         public MainWindow()
