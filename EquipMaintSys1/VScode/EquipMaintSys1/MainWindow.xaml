@@ -26,19 +26,21 @@
                     <Button x:Name="resolveFaultBtn" Content="Resolve a Fault" HorizontalAlignment="Left" Margin="264,10,0,0" VerticalAlignment="Top" Width="121" Click="resolveFaultBtn_Click"/>
                     <ComboBox x:Name="cbo_Fault" HorizontalAlignment="Left" Margin="460,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbo_Fault_SelectionChanged">
                     </ComboBox>
-                    <DockPanel x:Name="dpFault" Height="336" Width="646" Margin="10,60,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" LastChildFill="False" Grid.RowSpan="1">
-                        <TextBox x:Name="tbxFaultDetail" Width="645" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="Enter fault description here, once satisified click 'Submit'" TextWrapping="Wrap" GotFocus="tbxFaultDetail_GotFocus" Height="32"/>
-                        <ListView x:Name="listV_fault_data" Width="644" Margin="0,33,0,0" HorizontalAlignment="Left">
+                    <TextBox x:Name="tbxFaultDetail" Width="645" Margin="12,55,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="Enter fault description here, once satisified click 'Submit'" TextWrapping="Wrap" GotFocus="tbxFaultDetail_GotFocus" Height="32"/>
+                    <DockPanel x:Name="dpFault" Height="305" Width="646" Margin="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" LastChildFill="False" Grid.RowSpan="1" Grid.Row="1">
+
+                        <ListView x:Name="listV_fault_data" Width="644" HorizontalAlignment="Left">
                             <ListView.RenderTransform>
                                 <TransformGroup>
-                                    <ScaleTransform ScaleX="-1"/>
+                                    <ScaleTransform ScaleX="1"/>
                                     <SkewTransform/>
                                     <RotateTransform/>
                                     <TranslateTransform/>
                                 </TransformGroup>
                             </ListView.RenderTransform>
                             <ListView.View>
-                                <GridView>
+                                <GridView x:Name="faultGridView">
+                                    <GridViewColumn/>
                                     <GridViewColumn Header="Incindent#" DisplayMemberBinding="{Binding Incindent#}"/>
                                     <GridViewColumn Header="Machine" DisplayMemberBinding="{Binding Machine}"/>
                                     <GridViewColumn Header="Component" DisplayMemberBinding="{Binding Component}"/>
@@ -59,7 +61,7 @@
                         <ColumnDefinition Width="209*"/>
                         <ColumnDefinition Width="457*"/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="adminBtn" Content="Submit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="71" Grid.Column="1"/>
+                    <Button x:Name="adminBtn" Content="Submit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="71" Grid.Column="1" Click="adminBtn_Click"/>
                     <Button x:Name="addBtn" Content="Add Item" HorizontalAlignment="Left" Margin="138,35,0,0" VerticalAlignment="Top" Width="121" Height="20" Grid.ColumnSpan="2" Click="addBtn_Click"/>
                     <Button x:Name="archiveBtn" Content="Archive Item" HorizontalAlignment="Left" Margin="55,35,0,0" VerticalAlignment="Top" Width="121" Height="20" Grid.Column="1" Click="archiveBtn_Click"/>
                     <Button x:Name="queryBreakBtn" Content="Query Breakdown's" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Width="121" Click="queryBreakBtn_Click"/>
@@ -69,15 +71,19 @@
 
 
 
-
-
-
                     <DockPanel x:Name="dpAdmin" HorizontalAlignment="Left" Height="336" LastChildFill="False" Margin="10,60,0,0" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="2">
                         <ListView x:Name="listV_data" Height="306" VerticalAlignment="Bottom" Width="619" Margin="0,30,0,0">
                             <!--<ListView x:Name="listView" Height="320" VerticalAlignment="Top" Width="488" ItemsSource="{Binding TestListSummaryCollection}">-->
                             <ListView.View>
-                                <GridView>
+                                <GridView x:Name="adminGridView">
                                     <GridViewColumn/>
+                                    <GridViewColumn Header="Incindent#" DisplayMemberBinding="{Binding Incindent#}"/>
+                                    <GridViewColumn Header="Machine" DisplayMemberBinding="{Binding Machine}"/>
+                                    <GridViewColumn Header="Component" DisplayMemberBinding="{Binding Component}"/>
+                                    <GridViewColumn Header="Technician" DisplayMemberBinding="{Binding Technician}"/>
+                                    <GridViewColumn Header="Details" DisplayMemberBinding="{Binding Details}"/>
+                                    <GridViewColumn Header="Start Date/Time" DisplayMemberBinding="{Binding Start Date/Time}"/>
+                                    <GridViewColumn Header="End Date/Time" DisplayMemberBinding="{Binding End Date/Time}"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
