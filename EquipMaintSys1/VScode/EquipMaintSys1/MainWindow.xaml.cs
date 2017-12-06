@@ -45,6 +45,7 @@ namespace EquipMaintSys1
         {
             InitializeComponent();
             cbo_Selection.Visibility = System.Windows.Visibility.Hidden;
+            cbo_Component.Visibility = System.Windows.Visibility.Hidden;
             adminBtn.Visibility = System.Windows.Visibility.Hidden;
             cbo_Fault.Visibility = System.Windows.Visibility.Hidden;
             faultsBtn.Visibility = System.Windows.Visibility.Hidden;
@@ -53,6 +54,7 @@ namespace EquipMaintSys1
 
         #region REGION -- Search TAB
         #endregion REGION -- Search TAB
+
         #region REGION -- FAULT TAB
         private void Fault_Tab_Initialized(object sender, EventArgs e)
         {
@@ -118,7 +120,6 @@ namespace EquipMaintSys1
                 try
                 {
                     string machine = cbo_Fault.SelectedItem.ToString();
-                    int log_num = 1004;
                     string query = string.Format("INSERT INTO dbo.Fault_Log where Name='{0}'", machine);
                     con.Open();
                     //SqlCommand commObject1 = new SqlCommand("select Name from Equiptment", con);
@@ -186,51 +187,137 @@ namespace EquipMaintSys1
 
             #endregion REGION -- resolve a fault
         }// end faultsBtn_Click
+
         #endregion FAULT TAB
+
         #region REGION -- ADMIN TAB
         #region REGION -- adminTabBtnSecection
         private void queryBreakBtn_Click(object sender, RoutedEventArgs e)
         {
             admB = 1;
+            cbo_Selection.Items.Clear();
             cbo_Selection.Visibility = System.Windows.Visibility.Visible;
-        }
-        private void queryMaintBtn_Click(object sender, RoutedEventArgs e)
-        {
-            admB = 2;
-            cbo_Selection.Visibility = System.Windows.Visibility.Visible;
-        }
-        private void queryCompBtn_Click(object sender, RoutedEventArgs e)
-        {
-            admB = 3;
-            cbo_Selection.Visibility = System.Windows.Visibility.Visible;
-        }
-        private void queryUsersBtn_Click(object sender, RoutedEventArgs e)
-        {
-            admB = 4;
-            cbo_Selection.Visibility = System.Windows.Visibility.Visible;
-        }
-        public void addBtn_Click(object sender, RoutedEventArgs e)
-        {
-            admB = 5;
-            cbo_Selection.Visibility = System.Windows.Visibility.Visible;
-
-
-            fauB = 1;
-            cbo_Fault.Visibility = System.Windows.Visibility.Visible;
 
             try
             {
                 con.Open();
-                //SqlCommand commObject1 = new SqlCommand("select Name from Equiptment", con);
-                SqlDataAdapter commObject1 = new SqlDataAdapter("select * from Item", con);
+                SqlDataAdapter commObject1 = new SqlDataAdapter("select Name from Equiptment", con);
                 DataTable dt = new DataTable();
                 commObject1.Fill(dt);
                 foreach (DataRow row in dt.Rows)
                 {
                     cbo_Selection.Items.Add(row["Name"].ToString());
-                    //cbo_Fault.Items.Add(row["Name"].ToString());
                     //listV_fault_data.Items.Add(row["Name"].ToString());
-                }
+                }// end foreach
+            }// end try
+
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message); }// end catch
+
+            finally
+            { con.Close(); }//end finally
+        }
+        private void queryMaintBtn_Click(object sender, RoutedEventArgs e)
+        {
+            admB = 2;
+            cbo_Selection.Items.Clear();
+            cbo_Selection.Visibility = System.Windows.Visibility.Visible;
+
+            try
+            {
+                con.Open();
+                SqlDataAdapter commObject1 = new SqlDataAdapter("select Name from Equiptment", con);
+                DataTable dt = new DataTable();
+                commObject1.Fill(dt);
+                foreach (DataRow row in dt.Rows)
+                {
+                    cbo_Selection.Items.Add(row["Name"].ToString());
+                    //listV_fault_data.Items.Add(row["Name"].ToString());
+                }// end foreach
+            }// end try
+
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message); }// end catch
+
+            finally
+            { con.Close(); }//end finally
+        }
+        private void queryCompBtn_Click(object sender, RoutedEventArgs e)
+        {
+            admB = 3;
+            int i = 0;
+            cbo_Selection.Items.Clear();
+            cbo_Selection.Visibility = System.Windows.Visibility.Visible;
+            try
+            {
+                con.Open();
+                SqlDataAdapter commObject1 = new SqlDataAdapter("select Name from Equiptment", con);
+                DataTable dt = new DataTable();
+                commObject1.Fill(dt);
+                foreach (DataRow row in dt.Rows)
+                {
+                    cbo_Selection.Items.Add(row["Name"].ToString());
+                    //listV_fault_data.Items.Add(row["Name"].ToString());
+                }// end foreach    
+
+                con.Close();
+
+                cbo_Component.Items.Clear();
+                System.Threading.Thread.Sleep(1000);
+                cbo_Component.Visibility = System.Windows.Visibility.Visible;
+
+                try
+                {
+                    con.Open();
+                    string equip = cbo_Selection.SelectedItem.ToString();
+                    string query = string.Format("select Name from Equiptment WHERE Linked_Equiptment='{0}'", equip);
+                    SqlDataAdapter commObject2 = new SqlDataAdapter(query, con);
+                    DataTable dt2 = new DataTable();
+                    commObject1.Fill(dt2);
+                    foreach (DataRow row in dt2.Rows)
+                    {
+                        cbo_Component.Items.Add(row["Name"].ToString());
+                        //listV_fault_data.Items.Add(row["Name"].ToString());
+                    }// end foreach
+                }// end try
+
+                catch (Exception ex)
+                { }// MessageBox.Show(ex.Message); }// end catch
+
+                //finally
+                //{ con.Close(); }//end finally            
+            }// end try
+
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message); }// end catch
+
+            finally
+            { con.Close();}//end finally           
+
+        }
+        private void queryUsersBtn_Click(object sender, RoutedEventArgs e)
+        {
+            admB = 4;
+            cbo_Selection.Items.Clear();
+            cbo_Selection.Visibility = System.Windows.Visibility.Visible;
+        }
+        public void addBtn_Click(object sender, RoutedEventArgs e)
+        {
+            admB = 5;
+            cbo_Selection.Items.Clear();
+            cbo_Selection.Visibility = System.Windows.Visibility.Visible;
+
+            try
+            {
+                con.Open();
+                SqlDataAdapter commObject1 = new SqlDataAdapter("select Name from Item", con);
+                DataTable dt = new DataTable();
+                commObject1.Fill(dt);
+                foreach (DataRow row in dt.Rows)
+                {
+                    cbo_Selection.Items.Add(row["Name"].ToString());
+                    //listV_fault_data.Items.Add(row["Name"].ToString());
+                }// end foreach
             }// end try
 
             catch (Exception ex)
@@ -239,40 +326,40 @@ namespace EquipMaintSys1
             finally
             { con.Close(); }//end finally
 
-            // L00143846_EquiptMaintSys1Entities db = new L00143846_EquiptMaintSys1Entities();
-            // using (L00143846_EquiptMaintSys1Entities db = new L00143846_EquiptMaintSys1Entities())
-            //con.Open();
-            //SqlCommand commObject1 = new SqlCommand("select Name from Item", con);
-
-            // L00143846_EquiptMaintSys1Entities db = new L00143846_EquiptMaintSys1Entities();
-            // using (L00143846_EquiptMaintSys1Entities db = new L00143846_EquiptMaintSys1Entities())
-            //try
-            //{
-            //    //SqlDataAdapter sda = new SqlDataAdapter("select Name from Item", con);
-            //    SqlDataReader dr = commObject1.ExecuteReader();
-            //    while (dr.Read())
-            //    {
-            //        //ListViewItem y = new ListViewItem(dr["Names"].ToString());
-            //        //tblkOutput.ToString();
-            //        //lbxOutput.ToString();
-            //    }
-            //    //DataTable dt = new DataTable();
-            //    //sda.Fill(dt);
-            //    //cbo_Selection.Items.Add(dt);
-            //}// end try
-
 
         }
         private void archiveBtn_Click(object sender, RoutedEventArgs e)
         {
             admB = 6;
+            cbo_Selection.Items.Clear();
             cbo_Selection.Visibility = System.Windows.Visibility.Visible;
+
+            try
+            {
+                con.Open();
+                SqlDataAdapter commObject1 = new SqlDataAdapter("select Name from Item", con);
+                DataTable dt = new DataTable();
+                commObject1.Fill(dt);
+                foreach (DataRow row in dt.Rows)
+                {
+                    cbo_Selection.Items.Add(row["Name"].ToString());
+                    //listV_fault_data.Items.Add(row["Name"].ToString());
+                }// end foreach
+            }// end try
+
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message); }// end catch
+
+            finally
+            { con.Close(); }//end finally
         }
         #endregion  REGION -- adminTabBtnSecection
         private void cbo_Selection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             adminBtn.Visibility = System.Windows.Visibility.Visible;
             admMachineSelected = 1;
+
+            
         }
         private void adminBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -290,6 +377,7 @@ namespace EquipMaintSys1
 
 
         #endregion REGION -- ADMIN TAB
+
         #region REGION -- EXIT TAB
         private void exitBtn_Click(object sender, RoutedEventArgs e)
         {
