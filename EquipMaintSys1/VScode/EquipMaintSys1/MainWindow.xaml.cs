@@ -32,15 +32,19 @@ namespace EquipMaintSys1
         static string conString = @"Data Source=172.28.134.1;Initial Catalog=L00143846_EquiptMaintSys1;Persist Security Info=True;User ID=j.mcdaid;Password=s4VrsthkQb;Pooling=False";
         SqlConnection con = new SqlConnection(conString);
         #endregion -- DATABASE CONNECTION
+
         #region REGION -- VARIABLES
         // fault tab variables, the int variables are use for logic decisions
         int fauB = 0;
         int fauMachineSelected = 0;
         int fauTbx = 0;
+
         //admin tab variables, the int variables are use for logic decisions
         int admB = 0;
         int admMachineSelected = 0;
+
         #endregion -- VARIABLES
+
         public MainWindow()
         {
             InitializeComponent();
@@ -158,12 +162,13 @@ namespace EquipMaintSys1
                 try
                 {
                     string machine = cbo_Fault.SelectedItem.ToString();
-                    string t = "07/02/2017 12:15";
-                    //string t = DateTime.Now.ToString("MM/dd/yyyy h:mm");
-                    string query = string.Format("INSERT INTO dbo.Fault_Log (Name, Fault_Description, Start_Date_Time) VALUES ('{0}', '{1}', '{2}')", machine, details, t);
+                    //string t = "10/10/2017 10:10"; //used for testing
+                    string t = DateTime.Now.ToString("MM/dd/yyyy h:mm");
+                    string queryReport = string.Format("INSERT INTO dbo.Fault_Log (Name, Fault_Description, Start_Date_Time) VALUES ('{0}', '{1}', '{2}')", machine, details, t);
 
                     con.Open();
-                    SqlDataAdapter commObject1 = new SqlDataAdapter(query, con);
+                    SqlCommand cmd = new SqlCommand(queryReport, con);
+                    cmd.ExecuteNonQuery();
                     //message box used for testing
                     //MessageBox.Show(string.Format("{0}, {1}, \n{2}", machine, t, details), "Fault Details");
                 }// end TRY
@@ -172,7 +177,7 @@ namespace EquipMaintSys1
                 { MessageBox.Show(ex.Message); }// end catch
 
                 finally
-                { MessageBox.Show("Fault successfully logged"); con.Close(); }//end finally
+                { MessageBox.Show("Fault successfully logged"); con.Close(); }//end finally   
 
             }// end IF
             #endregion  REGION -- report a fault
@@ -194,7 +199,7 @@ namespace EquipMaintSys1
                     foreach (DataRow row in dt.Rows)
                     {
                         
-                       // faultGridView.Equals(row);
+                       faultGridView.Equals(row);
                         //faultGridView.DataSource = row();
                         ////var incindent = query["Event_Num"];
                         ////var mach = query["Name"];

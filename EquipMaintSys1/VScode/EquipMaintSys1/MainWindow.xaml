@@ -60,13 +60,13 @@
                         <ColumnDefinition Width="209*"/>
                         <ColumnDefinition Width="457*"/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="adminBtn" Content="Submit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="71" Grid.Column="1" Click="adminBtn_Click"/>
-                    <Button x:Name="addBtn" Content="Add Item" HorizontalAlignment="Left" Margin="138,35,0,0" VerticalAlignment="Top" Width="121" Height="20" Grid.ColumnSpan="2" Click="addBtn_Click"/>
-                    <Button x:Name="archiveBtn" Content="Archive Item" HorizontalAlignment="Left" Margin="264,35,0,0" VerticalAlignment="Top" Width="121" Height="20" Click="archiveBtn_Click" Grid.ColumnSpan="2"/>
-                    <Button x:Name="queryBreakBtn" Content="Query Breakdown's" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Width="121" Click="queryBreakBtn_Click"/>
-                    <Button x:Name="queryMaintBtn" Content="Query Maintenance" HorizontalAlignment="Left" Margin="138,10,0,0" VerticalAlignment="Top" Width="121" Grid.ColumnSpan="2" Click="queryMaintBtn_Click"/>
-                    <Button x:Name="queryCompBtn" Content="Query Components" HorizontalAlignment="Left" Margin="264,10,0,0" VerticalAlignment="Top" Width="121" Click="queryCompBtn_Click" Grid.ColumnSpan="2"/>
-                    <ComboBox x:Name="cbo_Selection" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" SelectionChanged="cbo_Selection_SelectionChanged"/>
+                    <Button x:Name="adminBtn" Content="Submit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="71" Grid.Column="1" Click="adminBtn_Click" TabIndex="9"/>
+                    <Button x:Name="addBtn" Content="Add Item" HorizontalAlignment="Left" Margin="138,35,0,0" VerticalAlignment="Top" Width="121" Height="20" Grid.ColumnSpan="2" Click="addBtn_Click" TabIndex="6"/>
+                    <Button x:Name="archiveBtn" Content="Archive Item" HorizontalAlignment="Left" Margin="264,35,0,0" VerticalAlignment="Top" Width="121" Height="20" Click="archiveBtn_Click" Grid.ColumnSpan="2" TabIndex="7"/>
+                    <Button x:Name="queryBreakBtn" Content="Query Breakdown's" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Width="121" Click="queryBreakBtn_Click" TabIndex="2"/>
+                    <Button x:Name="queryMaintBtn" Content="Query Maintenance" HorizontalAlignment="Left" Margin="138,10,0,0" VerticalAlignment="Top" Width="121" Grid.ColumnSpan="2" Click="queryMaintBtn_Click" TabIndex="3"/>
+                    <Button x:Name="queryCompBtn" Content="Query Components" HorizontalAlignment="Left" Margin="264,10,0,0" VerticalAlignment="Top" Width="121" Click="queryCompBtn_Click" Grid.ColumnSpan="2" TabIndex="4"/>
+                    <ComboBox x:Name="cbo_Selection" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" SelectionChanged="cbo_Selection_SelectionChanged" TabIndex="8"/>
 
 
 
@@ -87,11 +87,11 @@
                             </ListView.View>
                         </ListView>
                     </DockPanel>
-                    <Button x:Name="queryUsersBtn" Content="Query Users" HorizontalAlignment="Left" Margin="12,35,0,0" VerticalAlignment="Top" Width="121" Click="queryUsersBtn_Click"/>
+                    <Button x:Name="queryUsersBtn" Content="Query Users" HorizontalAlignment="Left" Margin="12,35,0,0" VerticalAlignment="Top" Width="121" Click="queryUsersBtn_Click" TabIndex="5"/>
 
                 </Grid>
             </TabItem>
-            <TabItem x:Name="Exit_Tab" Header="Exit" Height="35" Width="60" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="6,2">
+            <TabItem x:Name="Exit_Tab" Header="Exit" Height="35" Width="60" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="6,2" Margin="-1,0,0,0">
                 <Grid Background="#FFE5E5E5">
                     <Button x:Name="exitBtn" Content="Exit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="70" Click="exitBtn_Click"/>
                 </Grid>
