@@ -45,7 +45,6 @@ namespace EquipMaintSys1
         {
             InitializeComponent();
             cbo_Selection.Visibility = System.Windows.Visibility.Hidden;
-            cbo_Component.Visibility = System.Windows.Visibility.Hidden;
             adminBtn.Visibility = System.Windows.Visibility.Hidden;
             cbo_Fault.Visibility = System.Windows.Visibility.Hidden;
             faultsBtn.Visibility = System.Windows.Visibility.Hidden;
@@ -56,8 +55,13 @@ namespace EquipMaintSys1
         #endregion REGION -- Search TAB
 
         #region REGION -- FAULT TAB
-        private void Fault_Tab_Initialized(object sender, EventArgs e)
+
+        private void reportFaultBtn_Click(object sender, RoutedEventArgs e)
         {
+            fauB = 1;
+            cbo_Fault.Items.Clear();
+            cbo_Fault.Visibility = System.Windows.Visibility.Visible;
+
             try
             {
                 con.Open();
@@ -77,24 +81,58 @@ namespace EquipMaintSys1
 
             finally
             { con.Close(); }//end finally
-
-        }
-        private void reportFaultBtn_Click(object sender, RoutedEventArgs e)
-        {
-            fauB = 1;
-            cbo_Fault.Visibility = System.Windows.Visibility.Visible;
         }
         private void updateFaultBtn_Click(object sender, RoutedEventArgs e)
         {
             fauB = 2;
+            cbo_Fault.Items.Clear();
             cbo_Fault.Visibility = System.Windows.Visibility.Visible;
             tbxFaultDetail.Visibility = System.Windows.Visibility.Collapsed;
+            try
+            {
+                con.Open();
+                //SqlCommand commObject1 = new SqlCommand("select Name from Equiptment", con);
+                SqlDataAdapter commObject1 = new SqlDataAdapter("select Name from Equiptment", con);
+                DataTable dt = new DataTable();
+                commObject1.Fill(dt);
+                foreach (DataRow row in dt.Rows)
+                {
+                    cbo_Fault.Items.Add(row["Name"].ToString());
+                    //listV_fault_data.Items.Add(row["Name"].ToString());
+                }// end foreach
+            }// end try
+
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message); }// end catch
+
+            finally
+            { con.Close(); }//end finally
         }
         private void resolveFaultBtn_Click(object sender, RoutedEventArgs e)
         {
             fauB = 3;
+            cbo_Fault.Items.Clear();
             cbo_Fault.Visibility = System.Windows.Visibility.Visible;
             tbxFaultDetail.Visibility = System.Windows.Visibility.Collapsed;
+            try
+            {
+                con.Open();
+                //SqlCommand commObject1 = new SqlCommand("select Name from Equiptment", con);
+                SqlDataAdapter commObject1 = new SqlDataAdapter("select Name from Equiptment", con);
+                DataTable dt = new DataTable();
+                commObject1.Fill(dt);
+                foreach (DataRow row in dt.Rows)
+                {
+                    cbo_Fault.Items.Add(row["Name"].ToString());
+                    //listV_fault_data.Items.Add(row["Name"].ToString());
+                }// end foreach
+            }// end try
+
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message); }// end catch
+
+            finally
+            { con.Close(); }//end finally
         }        
         private void cbo_Fault_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -120,34 +158,32 @@ namespace EquipMaintSys1
                 try
                 {
                     string machine = cbo_Fault.SelectedItem.ToString();
-                    string query = string.Format("INSERT INTO dbo.Fault_Log where Name='{0}'", machine);
-                    con.Open();
-                    //SqlCommand commObject1 = new SqlCommand("select Name from Equiptment", con);
-                    SqlDataAdapter commObject1 = new SqlDataAdapter(query, con);
-                    DataTable dt = new DataTable();
-                    commObject1.Fill(dt);
+                    string t = "07/02/2017 12:15";
+                    //string t = DateTime.Now.ToString("MM/dd/yyyy h:mm");
+                    string query = string.Format("INSERT INTO dbo.Fault_Log (Name, Fault_Description, Start_Date_Time) VALUES ('{0}', '{1}', '{2}')", machine, details, t);
 
-                    listV_fault_data.Items.Clear();
-                    foreach (DataRow row in dt.Rows)
-                    {
-                    }// end FOREACH
+                    con.Open();
+                    SqlDataAdapter commObject1 = new SqlDataAdapter(query, con);
+                    //message box used for testing
+                    //MessageBox.Show(string.Format("{0}, {1}, \n{2}", machine, t, details), "Fault Details");
                 }// end TRY
 
                 catch (Exception ex)
                 { MessageBox.Show(ex.Message); }// end catch
 
                 finally
-                { con.Close(); }//end finally
+                { MessageBox.Show("Fault successfully logged"); con.Close(); }//end finally
 
             }// end IF
             #endregion  REGION -- report a fault
             #region REGION -- update a fault
-            else if (fauB == 2 && fauMachineSelected ==1)
+            else if (fauB == 2 && fauMachineSelected ==1)//FAULTS        select * from dbo.fault_log
             {
                 try
                 {
                     string machine = cbo_Fault.SelectedItem.ToString();
-                    string query = string.Format("select Event_Num, Name, Component, Technician, Fault_Description, Start_Date_Time, End_Date_Time from Fault_Log where Name='{0}'", machine);
+                    //string query = string.Format("select Event_Num, Name, Component, Technician, Fault_Description, Start_Date_Time, End_Date_Time from Fault_Log where Name='{0}'", machine);
+                    string query = string.Format("select * from dbo.fault_log");
                     con.Open();
                     //SqlCommand commObject1 = new SqlCommand("select Name from Equiptment", con);
                     SqlDataAdapter commObject1 = new SqlDataAdapter(query, con);
@@ -157,7 +193,28 @@ namespace EquipMaintSys1
                     listV_fault_data.Items.Clear();
                     foreach (DataRow row in dt.Rows)
                     {
-                        listV_fault_data.Items.Add(row.ToString());
+                        
+                       // faultGridView.Equals(row);
+                        //faultGridView.DataSource = row();
+                        ////var incindent = query["Event_Num"];
+                        ////var mach = query["Name"];
+                        ////var component = query["Component"];
+                        ////var technician = query["Technician"];
+                        ////var details = query["Fault_Description"];
+                        ////var startTime = query["Start_Date_Time"];
+                        ////var endTime = query["End_Date_Time"];
+
+                        ////DataRow row = dt.NewRow();
+                        ////row["Incindent#"] = incindent;
+                        ////row["Machine"] = mach;
+                        ////row["Component"] = component;
+                        ////row["Technician"] = technician;
+                        ////row["Details"] = details;
+                        ////row["Start Date/Time"] = startTime;
+                        ////row["End Date/Time"] = endTime;
+                        ////dt.Rows.Add(row);
+
+                        // // listV_fault_data.Items.Add(row.ToString());
                         //ListViewItem entry = new ListViewItem(row[0].ToString());
                         //for (int i = 1; i < dt.Columns.Count; i++)
                         //{
@@ -245,7 +302,6 @@ namespace EquipMaintSys1
         private void queryCompBtn_Click(object sender, RoutedEventArgs e)
         {
             admB = 3;
-            int i = 0;
             cbo_Selection.Items.Clear();
             cbo_Selection.Visibility = System.Windows.Visibility.Visible;
             try
@@ -257,35 +313,11 @@ namespace EquipMaintSys1
                 foreach (DataRow row in dt.Rows)
                 {
                     cbo_Selection.Items.Add(row["Name"].ToString());
-                    //listV_fault_data.Items.Add(row["Name"].ToString());
-                }// end foreach    
+                }// end foreach 
+                
+                //System.Threading.Thread.Sleep(1000);
 
-                con.Close();
-
-                cbo_Component.Items.Clear();
-                System.Threading.Thread.Sleep(1000);
-                cbo_Component.Visibility = System.Windows.Visibility.Visible;
-
-                try
-                {
-                    con.Open();
-                    string equip = cbo_Selection.SelectedItem.ToString();
-                    string query = string.Format("select Name from Equiptment WHERE Linked_Equiptment='{0}'", equip);
-                    SqlDataAdapter commObject2 = new SqlDataAdapter(query, con);
-                    DataTable dt2 = new DataTable();
-                    commObject1.Fill(dt2);
-                    foreach (DataRow row in dt2.Rows)
-                    {
-                        cbo_Component.Items.Add(row["Name"].ToString());
-                        //listV_fault_data.Items.Add(row["Name"].ToString());
-                    }// end foreach
-                }// end try
-
-                catch (Exception ex)
-                { }// MessageBox.Show(ex.Message); }// end catch
-
-                //finally
-                //{ con.Close(); }//end finally            
+                           
             }// end try
 
             catch (Exception ex)
@@ -293,7 +325,6 @@ namespace EquipMaintSys1
 
             finally
             { con.Close();}//end finally           
-
         }
         private void queryUsersBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -363,16 +394,12 @@ namespace EquipMaintSys1
         }
         private void adminBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(admB == 1 && admMachineSelected == 1) { }
-            else if (admB == 2 && admMachineSelected == 1)
-            {
-
-
-            }
-            else if (admB == 3 && admMachineSelected == 1) { }
-            else if (admB == 4 && admMachineSelected == 1) { }
-            else if (admB == 5 && admMachineSelected == 1) { }
-            else if (admB == 6 && admMachineSelected == 1) { }
+            if(admB == 1 && admMachineSelected == 1) { }        //FAULTS        select * from dbo.fault_log
+            else if (admB == 2 && admMachineSelected == 1) { }  //MAINTENANCE   select * from dbo.Maintenance_Schedule
+            else if (admB == 3 && admMachineSelected == 1) { }  //COMPONENTS    select * from dbo.component where Linked_Equiptment='CNC'
+            else if (admB == 4 && admMachineSelected == 1) { }  //USERS         select * from dbo.Employees
+            else if (admB == 5 && admMachineSelected == 1) { }  //ADD ITEM      
+            else if (admB == 6 && admMachineSelected == 1) { }  //ARCHIVE ITEM  
         }
 
 
