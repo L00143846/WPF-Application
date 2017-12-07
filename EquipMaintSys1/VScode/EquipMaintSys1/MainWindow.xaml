@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EquipMaintSys1"
         mc:Ignorable="d"
-        Title="EMSystems" Height="500" Width="989">
-    <Grid>
+        Title="EMSystems" Height="500" Width="989" HorizontalAlignment="Center">
+    <Grid HorizontalAlignment="Center">
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="449" Margin="10,10,0,0" VerticalAlignment="Top" Width="961">
             <TabItem x:Name="Search_Tab" Header="Search" Height="35" Width="60" Padding="6,2">
                 <Grid Background="#FFE5E5E5">
@@ -88,6 +88,22 @@
                         </ListView>
                     </DockPanel>
                     <Button x:Name="queryUsersBtn" Content="Query Users" HorizontalAlignment="Left" Margin="12,35,0,0" VerticalAlignment="Top" Width="121" Click="queryUsersBtn_Click" TabIndex="5"/>
+                    <DockPanel x:Name="dpAdmin2" HorizontalAlignment="Left" Height="336" LastChildFill="False" Margin="10,60,0,0" VerticalAlignment="Top" Width="935" Grid.ColumnSpan="2">
+                        <ListView x:Name="listV_data2" Height="336" VerticalAlignment="Bottom" Width="934">
+                            <ListView.View>
+                                <GridView x:Name="adminGridView2">
+                                    <GridViewColumn/>
+                                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                                    <GridViewColumn Header="EmpNum" DisplayMemberBinding="{Binding EmpNum}" Width="100"/>
+                                    <GridViewColumn Header="Dept" DisplayMemberBinding="{Binding Dept}" Width="150"/>
+                                    <GridViewColumn Header="Manager" DisplayMemberBinding="{Binding Manager}" Width="150"/>
+                                    <GridViewColumn Header="Emp_Type" DisplayMemberBinding="{Binding Emp_Type}" Width="172"/>
+                                    <GridViewColumn Header="Archived" DisplayMemberBinding="{Binding Archived}" Width="100"/>
+                                    <GridViewColumn Header="Archived_By" DisplayMemberBinding="{Binding Archived_By}" Width="100"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </DockPanel>
 
                 </Grid>
             </TabItem>

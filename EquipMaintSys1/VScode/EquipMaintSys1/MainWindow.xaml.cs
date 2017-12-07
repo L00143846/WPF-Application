@@ -53,6 +53,8 @@ namespace EquipMaintSys1
             cbo_Fault.Visibility = System.Windows.Visibility.Hidden;
             faultsBtn.Visibility = System.Windows.Visibility.Hidden;
             tbxFaultDetail.Visibility = System.Windows.Visibility.Hidden;
+            dpAdmin.Visibility = System.Windows.Visibility.Hidden;
+            dpAdmin2.Visibility = System.Windows.Visibility.Hidden;
         }
 
         #region REGION -- Search TAB
@@ -259,6 +261,8 @@ namespace EquipMaintSys1
             admB = 1;
             cbo_Selection.Items.Clear();
             cbo_Selection.Visibility = System.Windows.Visibility.Visible;
+            dpAdmin.Visibility = System.Windows.Visibility.Visible;
+            dpAdmin2.Visibility = System.Windows.Visibility.Hidden;
 
             try
             {
@@ -284,6 +288,8 @@ namespace EquipMaintSys1
             admB = 2;
             cbo_Selection.Items.Clear();
             cbo_Selection.Visibility = System.Windows.Visibility.Visible;
+            dpAdmin.Visibility = System.Windows.Visibility.Visible;
+            dpAdmin2.Visibility = System.Windows.Visibility.Hidden;
 
             try
             {
@@ -309,6 +315,9 @@ namespace EquipMaintSys1
             admB = 3;
             cbo_Selection.Items.Clear();
             cbo_Selection.Visibility = System.Windows.Visibility.Visible;
+            dpAdmin.Visibility = System.Windows.Visibility.Visible;
+            dpAdmin2.Visibility = System.Windows.Visibility.Hidden;
+
             try
             {
                 con.Open();
@@ -336,6 +345,32 @@ namespace EquipMaintSys1
             admB = 4;
             cbo_Selection.Items.Clear();
             cbo_Selection.Visibility = System.Windows.Visibility.Visible;
+            dpAdmin.Visibility = System.Windows.Visibility.Hidden;
+            dpAdmin2.Visibility = System.Windows.Visibility.Visible;
+
+            try
+            {
+                con.Open();
+                SqlDataAdapter commObject1 = new SqlDataAdapter("select * from dbo.Employees", con);
+                DataTable dt = new DataTable();
+                commObject1.Fill(dt);
+                foreach (DataRow row in dt.Rows)
+                {
+                    //cbo_Selection.Items.Add(row["Name"].ToString());
+                    //adminGridView2.Items.Add(row());
+                    //adminGridView2.ToString() = row.ToString();
+                    //adminGridView2.SetCurrentValue = row;
+                }// end foreach
+            }// end try
+
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message); }// end catch
+
+            finally
+            { con.Close(); }//end finally
+
+
+
         }
         public void addBtn_Click(object sender, RoutedEventArgs e)
         {
