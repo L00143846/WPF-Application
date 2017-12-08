@@ -35,7 +35,7 @@ namespace EquipMaintSys1
 
         #region REGION -- VARIABLES
         // fault tab variables, the int variables are use for logic decisions
-        int fauB = 0;
+        public int fauB = 0;
         int fauMachineSelected = 0;
         int fauTbx = 0;
 
@@ -62,6 +62,15 @@ namespace EquipMaintSys1
 
         #region REGION -- FAULT TAB
 
+        public DataTable GetEquipmentNames()
+        {
+            con.Open();
+            //SqlCommand commObject1 = new SqlCommand("select Name from Equiptment", con);
+            SqlDataAdapter commObject1 = new SqlDataAdapter("select Name from Equiptment", con);
+            DataTable dt = new DataTable();
+            commObject1.Fill(dt);
+            return dt;
+        }
         private void reportFaultBtn_Click(object sender, RoutedEventArgs e)
         {
             fauB = 1;
