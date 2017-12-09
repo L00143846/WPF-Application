@@ -58,6 +58,7 @@ namespace EquipMaintSys1
         }
 
         #region REGION -- Search TAB
+        // no code added
         #endregion REGION -- Search TAB
 
         #region REGION -- FAULT TAB
@@ -259,12 +260,13 @@ namespace EquipMaintSys1
 
 
             #endregion REGION -- resolve a fault
-        }// end faultsBtn_Click
+        }
 
         #endregion FAULT TAB
 
         #region REGION -- ADMIN TAB
-        #region REGION -- adminTabBtnSecection
+
+        #region REGION -- ADMIN TAB Button Selection
         private void queryBreakBtn_Click(object sender, RoutedEventArgs e)
         {
             admB = 1;
@@ -433,7 +435,8 @@ namespace EquipMaintSys1
             finally
             { con.Close(); }//end finally
         }
-        #endregion  REGION -- adminTabBtnSecection
+        #endregion  REGION -- ADMIN TAB Button Selection
+
         private void cbo_Selection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             adminBtn.Visibility = System.Windows.Visibility.Visible;
