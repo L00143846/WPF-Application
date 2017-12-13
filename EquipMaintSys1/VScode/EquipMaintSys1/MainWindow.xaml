@@ -10,24 +10,38 @@
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="449" Margin="10,10,0,0" VerticalAlignment="Top" Width="961">
             <TabItem x:Name="Search_Tab" Header="Search" Height="35" Width="60" Padding="6,2">
                 <Grid Background="#FFE5E5E5">
-                    <Button x:Name="searchBtn" Content="Submit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="70"/>
+                    <Button x:Name="searchBtn" Content="Submit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="70" Click="searchBtn_Click"/>
+                    <Button x:Name="startSearchBtn" Content="Start Search" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Width="121" Click="startSearchBtn_Click"/>
+                    <ComboBox x:Name="cbo_searchEquipt" HorizontalAlignment="Left" Margin="138,8,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbo_searchEquipt_SelectionChanged"/>
+                    <DockPanel HorizontalAlignment="Left" Height="336" LastChildFill="False" Margin="10,60,0,0" VerticalAlignment="Top" Width="935">
+                        <ListView x:Name="listVsearch" Height="336" VerticalAlignment="Top" Width="934">
+                            <ListView.View>
+                                <GridView>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </DockPanel>
                 </Grid>
             </TabItem>
             <TabItem x:Name="Fault_Tab" Header="Faults" Height="35" Width="60" VerticalAlignment="Top" Padding="6,2">
                 <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="29*"/>
+                        <ColumnDefinition Width="926*"/>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="13*"/>
                         <RowDefinition Height="45*"/>
                     </Grid.RowDefinitions>
-                    <Button x:Name="faultsBtn" Content="Submit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="70" Click="faultsBtn_Click"/>
+                    <Button x:Name="faultsBtn" Content="Submit" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="45" Width="70" Click="faultsBtn_Click" Grid.Column="1"/>
 
-                    <Button x:Name="reportFaultBtn" Content="Report a Fault" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Width="121" Click="reportFaultBtn_Click"/>
-                    <Button x:Name="updateFaultBtn" Content="Update a Fault" HorizontalAlignment="Left" Margin="138,10,0,0" VerticalAlignment="Top" Width="121" Click="updateFaultBtn_Click"/>
-                    <Button x:Name="resolveFaultBtn" Content="Resolve a Fault" HorizontalAlignment="Left" Margin="264,10,0,0" VerticalAlignment="Top" Width="121" Click="resolveFaultBtn_Click"/>
-                    <ComboBox x:Name="cbo_Fault" HorizontalAlignment="Left" Margin="390,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbo_Fault_SelectionChanged">
+                    <Button x:Name="reportFaultBtn" Content="Report a Fault" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Width="121" Click="reportFaultBtn_Click" Grid.ColumnSpan="2"/>
+                    <Button x:Name="updateFaultBtn" Content="Update a Fault" HorizontalAlignment="Left" Margin="109,10,0,0" VerticalAlignment="Top" Width="121" Click="updateFaultBtn_Click" Grid.Column="1"/>
+                    <Button x:Name="resolveFaultBtn" Content="Resolve a Fault" HorizontalAlignment="Left" Margin="235,10,0,0" VerticalAlignment="Top" Width="121" Click="resolveFaultBtn_Click" Grid.Column="1"/>
+                    <ComboBox x:Name="cbo_Fault" HorizontalAlignment="Left" Margin="361,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbo_Fault_SelectionChanged" Grid.Column="1">
                     </ComboBox>
-                    <TextBox x:Name="tbxFaultDetail" Width="860" Margin="10,35,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="Enter fault description here, once satisified click 'Submit'" TextWrapping="Wrap" GotFocus="tbxFaultDetail_GotFocus" Height="20"/>
-                    <DockPanel x:Name="dpFault" Height="336" Width="935" Margin="10,60,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" LastChildFill="False" Grid.RowSpan="2">
+                    <TextBox x:Name="tbxFaultDetail" Width="860" Margin="10,35,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="Enter fault description here, once satisified click 'Submit'" TextWrapping="Wrap" GotFocus="tbxFaultDetail_GotFocus" Height="20" Grid.ColumnSpan="2"/>
+                    <DockPanel x:Name="dpFault" Height="336" Width="935" Margin="10,60,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" LastChildFill="False" Grid.RowSpan="2" Grid.ColumnSpan="2">
 
                         <ListView x:Name="listV_fault_data" Width="934" HorizontalAlignment="Left">
                             <ListView.RenderTransform>

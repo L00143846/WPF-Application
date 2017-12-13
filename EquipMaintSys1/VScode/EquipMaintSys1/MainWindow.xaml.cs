@@ -48,6 +48,8 @@ namespace EquipMaintSys1
         public MainWindow()
         {
             InitializeComponent();
+            cbo_searchEquipt.Visibility = System.Windows.Visibility.Hidden;
+            searchBtn.Visibility = System.Windows.Visibility.Hidden;
             cbo_Selection.Visibility = System.Windows.Visibility.Hidden;
             adminBtn.Visibility = System.Windows.Visibility.Hidden;
             cbo_Fault.Visibility = System.Windows.Visibility.Hidden;
@@ -58,7 +60,89 @@ namespace EquipMaintSys1
         }
 
         #region REGION -- Search TAB
-        // no code added
+
+
+        private void startSearchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            cbo_searchEquipt.Visibility = System.Windows.Visibility.Visible;
+            try
+            {
+                con.Open();
+                SqlDataAdapter commObject1 = new SqlDataAdapter("select Name from Equiptment", con);
+                DataTable dt = new DataTable();
+                commObject1.Fill(dt);
+                foreach (DataRow row in dt.Rows)
+                {
+                    cbo_searchEquipt.Items.Add(row["Name"].ToString());
+                }// end foreach
+            }// end try
+
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message); }// end catch
+
+            finally
+            { con.Close(); }//end finally
+        }// END startSearchBtn_Click
+        private void cbo_searchEquipt_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            searchBtn.Visibility = System.Windows.Visibility.Visible; 
+
+
+        }// END cbo_searchEquipt_SelectionChanged
+        private void searchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string machineName = cbo_searchEquipt.Text.ToString();
+            try
+            {                
+                con.Open();
+
+                #region REGION -- query Maintenance Schedule
+                string query1 = string.Format("select Equiptment, Start_Date_Time, End_Date_Time, Implementor, Frequency, Job_Description from dbo.Maintenance_Schedule WHERE Equiptment='{0}' OR Equiptment='All'", machineName);
+                SqlDataAdapter commObject1 = new SqlDataAdapter(query1, con);
+                DataTable dt1 = new DataTable();
+                commObject1.Fill(dt1);
+
+                dt1.Columns.Add("Machine");
+                dt1.Columns.Add("Start Date/Time");
+                dt1.Columns.Add("End Date/Time");
+                dt1.Columns.Add("Technician");
+                dt1.Columns.Add("Frequency");
+                dt1.Columns.Add("Details");
+
+                foreach (DataRow row in dt1.Rows)
+                {
+                    listVsearch.Items.Add(row.ToString());
+                }// end foreach
+                # endregion REGION -- query Maintenance Schedule
+
+                #region REGION -- query Fault Log
+                string query2 = string.Format("select * from dbo.Fault_Log WHERE Name='{0}'", machineName);
+                SqlDataAdapter commObject2 = new SqlDataAdapter(query2, con);
+                DataTable dt2 = new DataTable();
+                commObject2.Fill(dt2);
+                foreach (DataRow row in dt2.Rows)
+                {
+                    listVsearch.Items.Add(row.ToString());
+                }// end foreach
+                #endregion REGION -- query Fault Log
+
+                #region REGION -- Fill Data Table
+
+
+
+                #endregion REGION -- Fill Data Table
+
+            }// end try
+
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message); }// end catch
+
+            finally
+            { con.Close(); }//end finally
+        }// END searchBtn_Click
+
+
+
         #endregion REGION -- Search TAB
 
         #region REGION -- FAULT TAB
@@ -463,6 +547,9 @@ namespace EquipMaintSys1
             Close();
             Environment.Exit(0);
         }
+
+
+
         #endregion REGION -- EXIT TAB
 
 
