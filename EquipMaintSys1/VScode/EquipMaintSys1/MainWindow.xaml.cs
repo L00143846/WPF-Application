@@ -451,7 +451,7 @@ namespace EquipMaintSys1
                 commObject1.Fill(dt);
                 foreach (DataRow row in dt.Rows)
                 {
-                    //cbo_Selection.Items.Add(row["Name"].ToString());
+                    cbo_Selection.Items.Add(row["Name"].ToString());
                     //adminGridView2.Items.Add(row());
                     //adminGridView2.ToString() = row.ToString();
                     //adminGridView2.SetCurrentValue = row;
