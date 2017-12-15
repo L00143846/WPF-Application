@@ -446,7 +446,7 @@ namespace EquipMaintSys1
             try
             {
                 con.Open();
-                SqlDataAdapter commObject1 = new SqlDataAdapter("select * from dbo.Employees", con);
+                SqlDataAdapter commObject1 = new SqlDataAdapter("select Name from dbo.Employees", con);
                 DataTable dt = new DataTable();
                 commObject1.Fill(dt);
                 foreach (DataRow row in dt.Rows)
